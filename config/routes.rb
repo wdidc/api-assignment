@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  root 'assignments#index'
   resources :assignments do
     resources :criteria do
       resources :submissions, :only => [:create]

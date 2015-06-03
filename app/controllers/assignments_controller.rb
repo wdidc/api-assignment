@@ -29,9 +29,4 @@ class AssignmentsController < ApplicationController
       render json: @assignment.to_json, status: 200
     end
   end
-
-  private
-  def assignment_params
-    params.require(:assignment).permit(:title, :weekday, :end_date, :repo_url, :rubric_url)
-  end
 end

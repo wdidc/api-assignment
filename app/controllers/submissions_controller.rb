@@ -1,4 +1,4 @@
-class CriteriaController < ApplicationController
+class SubmissionsController < ApplicationController
 
   def index
     @assignment = Assignment.find_by(weekday: params[:assignment_id])
@@ -7,29 +7,23 @@ class CriteriaController < ApplicationController
   end
 
   def create
-    @assignment = Assignment.find_by(weekday: params[:assignment_id])
-    @criterium = @assignment.criteria.new(title: params[:title], body: params[:body])
-    if @criterium.save
+    @submission  = Submission.new(github_id: params[:github_id], criterium_id: params[:criterium_id], html_url: params[:html_url], repo_url: params[:repo_url], status: params[:status])
+    if @submission.save
       render json: @criterium.to_json, status: 200
     end
   end
 
   def update
-    @criterium = Criterium.find(params[:id])
-    if @criterium.update(title: params[:title], body: params[:body])
-      render json: @criterium.to_json, status: 200
+    @submission = Submission.find(params[:id])
+    if @submission.update(github_id: params[:github_id], criterium_id: params[:criterium_id], html_url: params[:html_url], repo_url: params[:repo_url], status: params[:status])
+      render json: @submission.to_json, status: 200
     end
   end
 
   def destroy
-    @criterium = Criterium.find(params[:id])
-    if @criterium.destroy
-      render json: @criterium.to_json, status: 200
+    @submission = Submission.find(params[:id])
+    if @submission.destroy
+      render json: @submission.to_json, status: 200
     end
-  end
-
-  private
-  def criterium_params
-    params.require(:criterium).permit(:github_id, :status)
   end
 end

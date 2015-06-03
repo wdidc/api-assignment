@@ -27,9 +27,4 @@ class CriteriaController < ApplicationController
       render json: @criterium.to_json, status: 200
     end
   end
-
-  private
-  def criterium_params
-    params.require(:criterium).permit(:github_id, :status)
-  end
 end

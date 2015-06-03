@@ -5,6 +5,7 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+Assignment.destroy_all
 Assignment.create([
   {title: "Project 1", weekday: "w03d01", due_date: "w03d05", repo_url: "www.some_repo_url.com", rubric_url: "some_rubric_url"},
   {title: "Project 2", weekday: "w06d01", due_date: "w06d05", repo_url: "www.another_repo_url.com", rubric_url: "another_rubric_url"}
