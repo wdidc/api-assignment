@@ -17,21 +17,21 @@ class AssignmentsController < ApplicationController
   end
 
   def update
-    @assignment = Assignment.find(params[:id])
+    @assignment = Assignment.find_by(weekday: params[:id])
     if @assignment.update(title: params[:title], weekday: params[:weekday], end_date: params[:end_date], repo_url: params[:repo_url], rubric_url: params[:rubric_url])
       render json: @assignment.to_json, status: 200
     end
   end
 
   def destroy
-    @assignment = Assignment.find(params[:id])
+    @assignment = Assignment.find_by(weekday: params[:id])
     if @assignment.destroy
       render json: @assignment.to_json, status: 200
     end
   end
 
   private
-  def homework_params
+  def assignment_params
     params.require(:assignment).permit(:title, :weekday, :end_date, :repo_url, :rubric_url)
   end
 end

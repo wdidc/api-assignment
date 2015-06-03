@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   resources :assignments do
-    resources :criteria
-    resources :submissions
+    resources :criteria do
+      resources :submissions, :only => [:create]
+    end
+    resources :submissions, :except => [:create]
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
