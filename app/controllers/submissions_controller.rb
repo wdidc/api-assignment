@@ -9,13 +9,13 @@ class SubmissionsController < ApplicationController
   def create
     @submission  = Submission.new(github_id: params[:github_id], criterium_id: params[:criterium_id], html_url: params[:html_url], repo_url: params[:repo_url], status: params[:status])
     if @submission.save
-      render json: @criterium.to_json, status: 200
+      render json: @submission.to_json, status: 200
     end
   end
 
   def update
     @submission = Submission.find(params[:id])
-    if @submission.update(github_id: params[:github_id], criterium_id: params[:criterium_id], html_url: params[:html_url], repo_url: params[:repo_url], status: params[:status])
+    if @submission.update(github_id: params[:github_id], html_url: params[:html_url], repo_url: params[:repo_url], status: params[:status])
       render json: @submission.to_json, status: 200
     end
   end

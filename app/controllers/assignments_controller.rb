@@ -10,7 +10,7 @@ class AssignmentsController < ApplicationController
   end
 
   def create
-    @assignment = Assignment.new(title: params[:title], weekday: params[:weekday], end_date: params[:end_date], repo_url: params[:repo_url], rubric_url: params[:rubric_url])
+    @assignment = Assignment.new(title: params[:title], weekday: params[:weekday], due_date: params[:due_date], repo_url: params[:repo_url], rubric_url: params[:rubric_url])
     if @assignment.save
       render json: @assignment.to_json, status: 200
     end
@@ -18,7 +18,7 @@ class AssignmentsController < ApplicationController
 
   def update
     @assignment = Assignment.find_by(weekday: params[:id])
-    if @assignment.update(title: params[:title], weekday: params[:weekday], end_date: params[:end_date], repo_url: params[:repo_url], rubric_url: params[:rubric_url])
+    if @assignment.update(title: params[:title], weekday: params[:weekday], due_date: params[:due_date], repo_url: params[:repo_url], rubric_url: params[:rubric_url])
       render json: @assignment.to_json, status: 200
     end
   end
