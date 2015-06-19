@@ -1,5 +1,4 @@
 class AssignmentsController < ApplicationController
-  before_action :authorize, only: [:create, :udpate, :delete]
   def index
     @assignments = Assignment.all
     render status: 200, json: @assignments.to_json
@@ -29,23 +28,5 @@ class AssignmentsController < ApplicationController
     if @assignment.destroy
       render json: @assignment.to_json, status: 200
     end
-  end
-  private
-  def authorize
-    # get all instructors
-    instructors = HTTParty.get("https://api.github.com/teams/1511667/members?access_token=#{params[:access_token]}")
-    user = HTTParty.get("https://api.github.com/user?access_token=#{params[:access_token]}")
-    begin
-      instructors.each do |instructor|
-        if user[:id] == instructor[:id]
-          return true
-        end
-      end
-    rescue
-    end
-    render json: {error: "not authorized"}
-    # get user
-    # if user == instructor continue with operation
-    # else throw error
   end
 end

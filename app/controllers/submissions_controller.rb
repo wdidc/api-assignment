@@ -1,5 +1,4 @@
 class SubmissionsController < ApplicationController
-
   def index
     @assignment = Assignment.find_by(weekday: params[:assignment_id])
     @submissions = @assignment.submissions
