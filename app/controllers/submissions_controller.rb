@@ -6,9 +6,13 @@ class SubmissionsController < ApplicationController
   end
 
   def create
-    @submission  = Submission.new(github_id: params[:github_id], criterium_id: params[:criterium_id], html_url: params[:html_url], repo_url: params[:repo_url], status: params[:status])
+    @assignment = Assignment.find(params[:assignment_id])
+    @submission  = @assignment.submissions.new(submission_params)
     if @submission.save
-      render json: @submission.to_json, status: 200
+      respond_to do |format|
+        format.html {redirect_to assignment_path(@assignment)}
+        format.json {render json: @assignment}
+      end
     end
   end
 
@@ -27,6 +31,6 @@ class SubmissionsController < ApplicationController
   end
   private
   def submission_params
-    params.require(:submission).permit(:title, :weekday, :due_date, :repo_url, :rubric_url)
+    params.require(:submission).permit(:github_id, :html_url, :repo_url, :status)
   end
 end
