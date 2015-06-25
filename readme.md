@@ -1,5 +1,12 @@
 # Assignments API
 
+## Authentication
+
+You can read public assignments without a token; however, to create, update, and delete assignments on a user’s behalf an access token is required as a query parameter
+with the key `access_token`.
+
+You can generate an access token at https://github.com/settings/tokens/new for testing purposes.
+
 ## List all assignments
 
 ```
@@ -36,9 +43,11 @@ lists an assignment by both id and weekday value. As an example:
 
 ```
 http://api.wdidc.org/assignments/1 
+```
 
-//or
+or
 
+```
 http://api.wdidc.org/assignments/w03d02
 ```
 
