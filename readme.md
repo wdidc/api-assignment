@@ -3,7 +3,7 @@
 ## List all assignments
 
 ```
-get /assignments
+GET /assignments
 ```
 
 lists all assignments given ever.
@@ -11,7 +11,7 @@ lists all assignments given ever.
 ##  Create an Assignment
 
 ```
-post /assignments
+POST /assignments
 ```
 
 creates a new assignment. required parameters are:
@@ -20,19 +20,17 @@ creates a new assignment. required parameters are:
 
 | Name | Type | Description |
 |---|---|---|
-| `title` | `string` | The title of the assignment | 
+| `title` | `string` | **Required.** The title of the assignment | 
+| `weekday` | `string` | **Required.** The weekday of the assignment of format w00d00 | 
+| `repo_url` | `string` | **Required.** The git cloneable repository url of the assignment |
+| `due_date` | `string` | The due date of the assignment of format w00d00 | 
+| `rubric_url` | `string` | A link to the rubric of the assignment | 
 
-- title
-- weekday 
-  - format: w00d00
-- due_date 
-  - format: w00d00
-- repo_url
-  - a clonebale git repository url
-- rubric_url
+## Get a single assignment
 
-
-## `get /assignments/:id`
+```
+GET /assignments/:id
+```
 
 lists an assignment by both id and weekday value. As an example:
 
@@ -43,9 +41,6 @@ http://api.wdidc.org/assignments/1
 
 http://api.wdidc.org/assignments/w03d02
 ```
-
-
-
 
 ## Local Setup
 
