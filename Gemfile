@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'httparty'

@@ -40,4 +40,14 @@ class AssignmentsController < ApplicationController
       render json: @assignment.to_json, status: 200
     end
   end
+
+  def authenticate
+    token = request.env['omniauth.auth'][:credentials][:token]
+    session[:token] = token
+    if authorize
+      redirect_to root_path
+    else
+      error json:{error: "not authorized"}
+    end
+  end
 end
