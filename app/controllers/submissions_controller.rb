@@ -1,6 +1,6 @@
 class SubmissionsController < ApplicationController
   def index
-    @assignment = Assignment.find_by(weekday: params[:assignment_id])
+    @assignment = Assignment.find_by(weekday: params[:assignment_id]) || Assignment.find(params[:assignment_id]) 
     @submissions = @assignment.submissions
     render status: 200, json: @submissions.to_json
   end
