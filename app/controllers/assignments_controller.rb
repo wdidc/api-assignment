@@ -9,7 +9,7 @@ class AssignmentsController < ApplicationController
       @assignment = Assignment.find_by(weekday: params[:id]) || Assignment.find(params[:id]) 
       render status: 200, json: @assignment.to_json
     rescue
-      render status: 404, json: {error:"Not found."}
+      render status: 404, json: {error:"Not found.", documentation: "https://github.com/wdidc/api-assignment/blob/master/readme.md"}
     end
   end
 
