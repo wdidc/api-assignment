@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :authenticate_user, except: [:authenticate]
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   # protect_from_forgery with: :exception
@@ -8,6 +9,15 @@ class ApplicationController < ActionController::Base
   def set_access_control_headers
       headers['Access-Control-Allow-Origin'] = "*"
       headers['Access-Control-Request-Method'] = %w{GET POST OPTIONS}.join(",")
+  end
+  def authenticate
+    token = request.env['omniauth.auth'][:credentials][:token]
+    session[:token] = token
+    if authorize
+      redirect_to root_path
+    else
+      error json:{error: "not authorized"}
+    end
   end
   private
   def authorize
@@ -27,4 +37,10 @@ class ApplicationController < ActionController::Base
     # if user == instructor continue with operation
     # else throw error
   end
+  def authenticate_user
+    unless session[:token]
+      redirect_to '/auth/github'
+    end
+  end
+
 end
