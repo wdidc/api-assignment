@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   get '/auth/github/callback', to: "assignments#authenticate"
   root 'assignments#index'
   resources :assignments do
-    resources :criteria
     resources :submissions
   end
 

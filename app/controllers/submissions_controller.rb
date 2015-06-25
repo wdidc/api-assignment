@@ -1,6 +1,6 @@
 class SubmissionsController < ApplicationController
   def index
-    @assignment = Assignment.find_by(weekday: params[:assignment_id]) || Assignment.find(params[:assignment_id]) 
+    @assignment = Assignment.find_by(weekday: params[:assignment_id]) || Assignment.find(params[:assignment_id])
     @submissions = @assignment.submissions
     render status: 200, json: @submissions.to_json
   end
@@ -24,5 +24,9 @@ class SubmissionsController < ApplicationController
     if @submission.destroy
       render json: @submission.to_json, status: 200
     end
+  end
+  private
+  def submission_params
+    params.require(:submission).permit(:title, :weekday, :due_date, :repo_url, :rubric_url)
   end
 end

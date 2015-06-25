@@ -1,3 +1,20 @@
 <h1><%= @assignment.title %></h1>
 <p>Repo URL: <%= @assignment.repo_url %></p>
-<p>Type: <%= @assignment.type %></p>
+<p>Type: <%= @assignment.assignment_type %></p>
+
+<h3>Add a new submission:</h3>
+<%= render 'submission_form' %>
+<h2>Submissions</h2>
+<% @submissions.each do |submission| %>
+  <div class='submission'>
+    <p><%= submission.github_id %></p>
+    <p><%= submission.html_url %></p>
+    <p><%= submission.repo_url %></p>
+    <p><%= submission.status %></p>
+  </div>
+<% end %>
+<!-- t.integer  "assignment_id"
+t.integer  "github_id"
+t.string   "html_url"
+t.string   "repo_url"
+t.string   "status" -->
