@@ -12,16 +12,11 @@ Assignment.create([
   ])
 
 Assignment.all.each do |assignment|
-  assignment.criteria.create([
-    {title: "user stories", body: "create 3 user stories"},
-    {title: "ERD's", body: "create erds"}
+  assignment.submissions.create([
+    {github_id: 12642, html_url: "www.htmlrus.com", repo_url: "www.reposrus.com", status: "complete"},
+    {github_id: 22642, html_url: "www.htmlrus.com", repo_url: "www.reposrus1.com", status: "complete"},
+    {github_id: 42642, html_url: "www.htmlrus.com", repo_url: "www.reposrus2.com", status: "incomplete"},
+    {github_id: 12342, html_url: "www.htmlrus.com", repo_url: "www.reposrus3.com", status: "complete"},
+    {github_id: 12542, html_url: "www.htmlrus.com", repo_url: "www.reposrus4.com", status: "incomplete"}
     ])
 end
-
-Submission.create([
-  {github_id: 12642, criterium_id: Criterium.all[0].id, html_url: "www.htmlrus.com", repo_url: "www.reposrus.com", status: "completed"},
-  {github_id: 22642, criterium_id: Criterium.all[1].id, html_url: "www.htmlrus.com", repo_url: "www.reposrus1.com", status: "completed"},
-  {github_id: 42642, criterium_id: Criterium.all[3].id, html_url: "www.htmlrus.com", repo_url: "www.reposrus2.com", status: "completed"},
-  {github_id: 12342, criterium_id: Criterium.all[3].id, html_url: "www.htmlrus.com", repo_url: "www.reposrus3.com", status: "completed"},
-  {github_id: 12542, criterium_id: Criterium.all[2].id, html_url: "www.htmlrus.com", repo_url: "www.reposrus4.com", status: "completed"}
-  ])
