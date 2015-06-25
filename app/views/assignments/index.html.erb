@@ -1,5 +1,6 @@
 <%= render 'form' %>
 
 <% @assignments.each do |assignment| %>
-<p><%= assignment.title %></p>
+<p><%= link_to assignment.title, assignment_path(assignment) %></p>
+
 <% end %>
