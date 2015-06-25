@@ -5,8 +5,12 @@ class AssignmentsController < ApplicationController
   end
 
   def show
-    @assignment = Assignment.find_by(weekday: params[:id])
-    render status: 200, json: @assignment.to_json
+    begin
+      @assignment = Assignment.find_by(weekday: params[:id]) || Assignment.find(params[:id]) 
+      render status: 200, json: @assignment.to_json
+    rescue
+      render status: 404, json: {error:"Not found."}
+    end
   end
 
   def create
