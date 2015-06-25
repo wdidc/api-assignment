@@ -1,12 +1,16 @@
 class AssignmentsController < ApplicationController
   def index
+    @assignment = Assignment.new
     @assignments = Assignment.all
-    render status: 200, json: @assignments.to_json
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @assignments}
+    end
   end
 
   def show
     begin
-      @assignment = Assignment.find_by(weekday: params[:id]) || Assignment.find(params[:id]) 
+      @assignment = Assignment.find_by(weekday: params[:id]) || Assignment.find(params[:id])
       render status: 200, json: @assignment.to_json
     rescue
       render status: 404, json: {error:"Not found.", documentation: "https://github.com/wdidc/api-assignment/blob/master/readme.md"}
@@ -16,7 +20,10 @@ class AssignmentsController < ApplicationController
   def create
     @assignment = Assignment.new(title: params[:title], weekday: params[:weekday], due_date: params[:due_date], repo_url: params[:repo_url], rubric_url: params[:rubric_url])
     if @assignment.save
-      render json: @assignment.to_json, status: 200
+      respond_to do |format|
+        format.html
+        format.json { render json: @assignment}
+      end
     end
   end
 

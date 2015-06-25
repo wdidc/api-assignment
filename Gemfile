@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
-
+gem 'omniauth'
+gem 'omniauth-github'
 gem 'httparty'
 gem 'pry'
 gem 'rack-cors', :require => 'rack/cors'

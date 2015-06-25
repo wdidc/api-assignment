@@ -1,0 +1,29 @@
+<%= form_for @assignment do |f| %>
+  <p>
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </p>
+
+  <p>
+    <%= f.label :weekday %><br>
+    <%= f.text_area :weekday %>
+  </p>
+
+  <p>
+    <%= f.label :due_date %><br>
+    <%= f.text_area :due_date %>
+  </p>
+
+  <p>
+    <%= f.label :repo_url %><br>
+    <%= f.text_area :repo_url %>
+  </p>
+
+  <p>
+    <%= f.label :rubric_url %><br>
+    <%= f.text_area :rubric_url %>
+  </p>
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
