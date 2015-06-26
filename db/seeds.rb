@@ -11,12 +11,10 @@ Assignment.create([
   {title: "Project 2", weekday: "w06d01", due_date: "w06d05", repo_url: "www.another_repo_url.com", rubric_url: "another_rubric_url", assignment_type: "project"}
   ])
 
+Submission.destroy_all
 Assignment.all.each do |assignment|
   assignment.submissions.create([
-    {github_id: 12642, html_url: "www.htmlrus.com", repo_url: "www.reposrus.com", status: "complete"},
-    {github_id: 22642, html_url: "www.htmlrus.com", repo_url: "www.reposrus1.com", status: "complete"},
-    {github_id: 42642, html_url: "www.htmlrus.com", repo_url: "www.reposrus2.com", status: "incomplete"},
-    {github_id: 12342, html_url: "www.htmlrus.com", repo_url: "www.reposrus3.com", status: "complete"},
-    {github_id: 12542, html_url: "www.htmlrus.com", repo_url: "www.reposrus4.com", status: "incomplete"}
-    ])
+    {github_id: 8145721, html_url: "www.htmlrus.com", repo_url: "www.reposrus.com", status: "complete"},
+    {github_id: 7883907, html_url: "www.htmlrus.com", repo_url: "www.reposrus1.com", status: "incomplete"}
+  ])
 end

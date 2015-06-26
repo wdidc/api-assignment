@@ -1,5 +1,6 @@
-<%= render 'form' %>
-
+<% if session[:token] %>
+  <%= render 'form' %>
+<% end %>
 <% @assignments.each do |assignment| %>
 <p><%= link_to assignment.title, assignment_path(assignment) %></p>
 

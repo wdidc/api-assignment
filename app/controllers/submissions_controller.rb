@@ -1,8 +1,32 @@
 class SubmissionsController < ApplicationController
   def index
     @assignment = Assignment.find_by(weekday: params[:assignment_id]) || Assignment.find(params[:assignment_id])
+    @students = Student.all
     @submissions = @assignment.submissions
-    render status: 200, json: @submissions.to_json
+    respond_to do |format|
+      format.html 
+      format.json { render status: 200, json: @submissions.to_json }
+    end
+  end
+
+  def new
+    @assignment = Assignment.find_by(weekday: params[:assignment_id]) || Assignment.find(params[:assignment_id])
+    @students = Student.all
+    @submissions = @assignment.submissions
+    respond_to do |format|
+      format.html 
+      format.json { render status: 200, json: @submissions.to_json }
+    end
+
+  end
+
+  def show
+    @assignment = Assignment.find_by(weekday: params[:assignment_id]) || Assignment.find(params[:assignment_id])
+    @submissions = @assignment.submissions
+    respond_to do |format|
+      format.html 
+      format.json { render status: 200, json: @submissions.to_json }
+    end
   end
 
   def create
@@ -10,7 +34,7 @@ class SubmissionsController < ApplicationController
     @submission  = @assignment.submissions.new(submission_params)
     if @submission.save
       respond_to do |format|
-        format.html {redirect_to assignment_path(@assignment)}
+        format.html {redirect_to assignment_submissions_path(@assignment) }
         format.json {render json: @assignment}
       end
     end

@@ -9,16 +9,13 @@ class AssignmentsController < ApplicationController
   end
 
   def show
-    begin
       @assignment = Assignment.find_by(weekday: params[:id]) || Assignment.find(params[:id])
       @submissions = @assignment.submissions
+      @students = Student.all
       respond_to do |format|
         format.html
         format.json { render json: @assignment}
       end
-    rescue
-      render status: 404, json: {error:"Not found.", documentation: "https://github.com/wdidc/api-assignment/blob/master/readme.md"}
-    end
   end
 
   def create

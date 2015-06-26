@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
       headers['Access-Control-Allow-Origin'] = "*"
       headers['Access-Control-Request-Method'] = %w{GET POST OPTIONS}.join(",")
   end
-
+  def logout
+    session.clear
+    redirect_to root_path
+  end
   private
 end
