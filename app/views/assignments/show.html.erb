@@ -5,7 +5,13 @@
 <%= link_to "Create new submission", new_assignment_submission_path(@assignment) %>
 
 <% @assignment.submissions.each do |submission| %>
-  <li><%= link_to submission.student["name"], assignment_submission_path(@assignment, submission) %></li>
+  <li>
+    <%= link_to submission.student["name"], assignment_submission_path(@assignment, submission) %>
+    <% if session[:token] %>
+      <%= link_to "edit", edit_assignment_submission_path(@assignment, submission)%>
+      <%= link_to 'Destroy', assignment_submission_path(@assignment, submission), method: :delete %></p>
+    <% end %>
+  </li>
 <% end %>
 
 <!-- t.integer  "assignment_id"

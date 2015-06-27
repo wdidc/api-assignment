@@ -41,17 +41,29 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def edit
+    @assignment = Assignment.find_by(weekday: params[:assignment_id]) || Assignment.find(params[:assignment_id])
+    @submission = Submission.find(params[:id])
+    @students = Student.all
+  end
   def update
     @submission = Submission.find(params[:id])
     if @submission.update(submission_params)
-      render json: @submission.to_json, status: 200
+      respond_to do |format|
+        format.html {redirect_to assignment_path(@assignment) }
+        format.json {render json: @assignment}
+      end
     end
   end
 
   def destroy
+    @assignment = Assignment.find_by(weekday: params[:assignment_id]) || Assignment.find(params[:assignment_id])
     @submission = Submission.find(params[:id])
     if @submission.destroy
-      render json: @submission.to_json, status: 200
+      respond_to do |format|
+        format.html {redirect_to assignment_path(@assignment) }
+        format.json {render json: @submission}
+      end
     end
   end
   private
