@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get '/logout', to: "application#logout"
   root 'assignments#index'
   resources :assignments do
+    get 'students/:student_id', to: "students#show"
     resources :submissions
   end
 
