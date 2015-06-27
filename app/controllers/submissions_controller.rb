@@ -23,6 +23,7 @@ class SubmissionsController < ApplicationController
   def show
     @assignment = Assignment.find_by(weekday: params[:assignment_id]) || Assignment.find(params[:assignment_id])
     @submissions = @assignment.submissions
+    @submission = Submission.find(params[:id])
     respond_to do |format|
       format.html 
       format.json { render status: 200, json: @submissions.to_json }

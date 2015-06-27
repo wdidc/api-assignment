@@ -4,6 +4,10 @@
 
 <%= link_to "Create new submission", new_assignment_submission_path(@assignment) %>
 
+<% @assignment.submissions.each do |submission| %>
+  <li><%= link_to submission.student["name"], assignment_submission_path(@assignment, submission) %></li>
+<% end %>
+
 <!-- t.integer  "assignment_id"
 t.integer  "github_id"
 t.string   "html_url"
