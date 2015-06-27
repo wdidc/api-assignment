@@ -1,5 +1,5 @@
 <h1><%= @assignment.title %></h1>
-<p>Repo URL: <%= @assignment.repo_url %></p>
+<p><%= link_to "View on GitHub", @assignment.repo_url %></p>
 <p>Type: <%= @assignment.assignment_type %></p>
 
 <%= link_to "Create new submission", new_assignment_submission_path(@assignment) %>
