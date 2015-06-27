@@ -8,4 +8,7 @@ class Submission < ActiveRecord::Base
       return {name:""}
     end
   end
+  def as_json(options={})
+    super.as_json(options).merge({assignment_title: self.assignment.title})
+  end
 end
