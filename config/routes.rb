@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   get '/auth/github/callback', to: "assignments#authenticate"
   get '/logout', to: "application#logout"
   root 'assignments#index'
-  get 'students/:student_id', to: "students#index"
+  get 'assignments/students/:student_id', to: "students#index"
   resources :assignments do
     get 'students/:student_id', to: "students#show"
     resources :submissions
