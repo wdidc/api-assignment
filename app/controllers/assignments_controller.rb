@@ -29,7 +29,7 @@ class AssignmentsController < ApplicationController
   end
 
   def update
-    @assignment = Assignment.find_by(weekday: params[:id])
+    @assignment = Assignment.find_by(weekday: params[:id]) || Assignment.find(params[:id])
     if @assignment.update(assignment_params)
       render json: @assignment.to_json, status: 200
     end

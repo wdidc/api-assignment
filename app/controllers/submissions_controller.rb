@@ -4,7 +4,7 @@ class SubmissionsController < ApplicationController
     @students = Student.all
     @submissions = @assignment.submissions
     respond_to do |format|
-      format.html 
+      format.html
       format.json { render status: 200, json: @submissions.to_json }
     end
   end
@@ -14,7 +14,7 @@ class SubmissionsController < ApplicationController
     @students = Student.all
     @submissions = @assignment.submissions
     respond_to do |format|
-      format.html 
+      format.html
       format.json { render status: 200, json: @submissions.to_json }
     end
 
@@ -25,7 +25,7 @@ class SubmissionsController < ApplicationController
     @submissions = @assignment.submissions
     @submission = Submission.find(params[:id])
     respond_to do |format|
-      format.html 
+      format.html
       format.json { render status: 200, json: @submissions.to_json }
     end
   end
@@ -43,7 +43,7 @@ class SubmissionsController < ApplicationController
 
   def update
     @submission = Submission.find(params[:id])
-    if @submission.update(github_id: params[:github_id], html_url: params[:html_url], repo_url: params[:repo_url], status: params[:status])
+    if @submission.update(submission_params)
       render json: @submission.to_json, status: 200
     end
   end
