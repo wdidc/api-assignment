@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 gem 'figaro'
 gem 'omniauth'
+gem 'unicorn'
 gem 'omniauth-github'
 gem 'httparty'
 gem 'pry'
