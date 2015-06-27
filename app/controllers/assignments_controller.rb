@@ -28,17 +28,27 @@ class AssignmentsController < ApplicationController
     end
   end
 
+  def edit
+    @assignment = Assignment.find_by(weekday: params[:id]) || Assignment.find(params[:id])
+  end
+
   def update
     @assignment = Assignment.find_by(weekday: params[:id]) || Assignment.find(params[:id])
     if @assignment.update(assignment_params)
-      render json: @assignment.to_json, status: 200
+      respond_to do |format|
+        format.html {redirect_to assignment_path(@assignment)}
+        format.json { render json: @assignment}
+      end
     end
   end
 
   def destroy
-    @assignment = Assignment.find_by(weekday: params[:id])
+    @assignment = Assignment.find_by(weekday: params[:id]) ||  Assignment.find(params[:id])
     if @assignment.destroy
-      render json: @assignment.to_json, status: 200
+      respond_to do |format|
+        format.html {redirect_to assignments_path}
+        format.json { render json: @assignment}
+      end
     end
   end
 

@@ -18,30 +18,23 @@ ActiveRecord::Schema.define(version: 20150603154346) do
 
   create_table "assignments", force: :cascade do |t|
     t.string   "title"
+    t.string   "assignment_type"
     t.string   "weekday"
     t.string   "due_date"
     t.string   "repo_url"
     t.string   "rubric_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "criteria", force: :cascade do |t|
-    t.integer  "assignment_id"
-    t.string   "title"
-    t.string   "body"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   create_table "submissions", force: :cascade do |t|
-    t.integer  "criterium_id"
+    t.integer  "assignment_id"
     t.integer  "github_id"
     t.string   "html_url"
     t.string   "repo_url"
     t.string   "status"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
 end

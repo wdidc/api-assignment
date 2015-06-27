@@ -2,6 +2,9 @@
   <%= render 'form' %>
 <% end %>
 <% @assignments.each do |assignment| %>
-<p><%= link_to assignment.title, assignment_path(assignment) %></p>
+<p>
+  <%= link_to assignment.title, assignment_path(assignment) %>
+  <%= link_to "edit", edit_assignment_path(assignment)%>
+  <%= link_to 'Destroy', assignment_path(assignment), method: :delete %></p>
 
 <% end %>
