@@ -57,6 +57,12 @@ http://api.wdidc.org/assignments/w03d02
 GET /assignments/:id/submissions
 ```
 
+## List assignment submissions by student id
+
+```
+GET /assignments/students/:github_id
+```
+
 ## Local Setup
 
     $ git clone git@github.com:wdidc/api-assignment.git
