@@ -62,6 +62,10 @@ class AssignmentsController < ApplicationController
     end
   end
 
+  def outcomes
+    @assignments = Assignment.where(assignment_type: "outcomes")
+  end
+
   private
   def assignment_params
     params.require(:assignment).permit(:title, :weekday, :due_date, :repo_url, :rubric_url, :assignment_type)

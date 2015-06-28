@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get '/auth/github/callback', to: "assignments#authenticate"
   get '/logout', to: "application#logout"
+  get '/outcomes', to: "assignments#outcomes"
   root 'assignments#index'
   get 'assignments/students/:student_id', to: "students#index"
   resources :assignments do
