@@ -13,3 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+body{
+  font-family:'Helvetica Neue', sans-serif;
+  max-width:40em;
+  margin:auto;
+  padding:1em;
+}
+
+h1 a{
+  font-inherit;
+  color:inherit;
+  letter-spacing:-.05em;
+  text-decoration:none;
+  border-bottom:1px dashed #000;
+}
