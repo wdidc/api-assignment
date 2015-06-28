@@ -1,4 +1,4 @@
-<%= form_for([@assignment, @assignment.submissions.build]) do |f| %>
+<%= form_for([@assignment, @submission]) do |f| %>
   <p>
     <%= f.label :github_id %><br>
     <%= f.select :github_id, @students.collect{|s| [ s["name"], s["github_user_id"]]}%>
