@@ -2,7 +2,11 @@
 <p><%= link_to "View on GitHub", @assignment.repo_url %></p>
 <p>Type: <%= @assignment.assignment_type %></p>
 
-<%= link_to "Create new submission", new_assignment_submission_path(@assignment) %>
+<% if session[:token] %>
+  <%= link_to "Create new submission", new_assignment_submission_path(@assignment) %>
+  <%= link_to "edit", edit_assignment_path(@assignment)%>
+  <%= link_to 'delete', assignment_path(@assignment), method: :delete %></p>
+<% end %> 
 
 <% @assignment.submissions.each do |submission| %>
   <div class='submission'>
