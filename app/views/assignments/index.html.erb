@@ -2,10 +2,13 @@
   <%= render 'form' %>
 <% end %>
 <% @assignments.each do |assignment| %>
-<p>
-  <%= link_to assignment.title, assignment_path(assignment) %>
+<div class='assignment'>
+  <h3><%= link_to assignment.title, assignment_path(assignment) %></h3>
+  <small>Updated <%= time_ago_in_words(assignment.updated_at) %> ago</small>
   <% if session[:token] %>
-  <%= link_to "edit", edit_assignment_path(assignment)%>
-  <%= link_to 'Destroy', assignment_path(assignment), method: :delete %></p>
+    <%= link_to "edit", edit_assignment_path(assignment)%>
+    <%= link_to 'delete', assignment_path(assignment), method: :delete %></p>
   <% end %> 
+</div>
 <% end %>
+

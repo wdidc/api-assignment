@@ -14,6 +14,10 @@
  *= require_self
  */
 
+a{
+  color:#3F78C0;
+}
+
 body{
   font-family:'Helvetica Neue', sans-serif;
   max-width:40em;
@@ -27,4 +31,17 @@ h1 a{
   letter-spacing:-.05em;
   text-decoration:none;
   border-bottom:1px dashed #000;
+}
+
+.assignment h3{
+  margin-bottom:.5em;
+}
+
+.submission{
+  border-bottom:1px solid #ccc;
+  padding:1em 0;
+}
+
+.submission h3{
+  margin:0;
 }
