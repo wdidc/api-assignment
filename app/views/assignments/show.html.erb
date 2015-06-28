@@ -1,6 +1,9 @@
 <h1><%= @assignment.title %></h1>
 <p><%= link_to "View on GitHub", @assignment.repo_url %></p>
 <p>Type: <%= @assignment.assignment_type %></p>
+<% if @assignment.due_date != "" %>
+  <p>Due Date: <%= @assignment.due_date %></p>
+<% end %>
 
 <% if session[:token] %>
   <%= link_to "Create new submission", new_assignment_submission_path(@assignment) %>

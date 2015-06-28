@@ -12,6 +12,10 @@
     <%= f.label :assignment_type %> 
     <%= f.select :assignment_type, [["homework","homework"],["outcomes","outcomes"],["project","project"]] %> 
   </p>
+  <p>
+    <%= f.label :due_date %> 
+    <%= f.date_field :due_date %> 
+  </p>
 
   <p>
     <%= f.submit %>

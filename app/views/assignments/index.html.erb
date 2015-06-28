@@ -3,7 +3,7 @@
 <% end %>
 <% @assignments.each do |assignment| %>
 <div class='assignment'>
-  <h3><%= link_to assignment.title, assignment_path(assignment) %></h3>
+  <h3><%= link_to assignment.title, assignment_path(assignment) %></h3><small>(<%= assignment.assignment_type %>)</small>
   <small>Updated <%= time_ago_in_words(assignment.updated_at) %> ago</small>
 </div>
 <% end %>
