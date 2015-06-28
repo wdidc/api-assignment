@@ -8,6 +8,10 @@
     <%= f.label :repo_url %><br>
     <%= f.text_field :repo_url %>
   </p>
+  <p>
+    <%= f.label :assignment_type %> 
+    <%= f.select :assignment_type, [["homework","homework"],["outcomes","outcomes"],["project","project"]] %> 
+  </p>
 
   <p>
     <%= f.submit %>

@@ -7,12 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <h1><a href="/">Assignments</a></h1>
-  <% if session[:token] %>
-    <%= link_to "Log out", '/logout' %>
-  <% else %>
-    <%= link_to "Log in with GitHub", '/auth/github' %>
-  <% end %>
+  <header class='cf'>
+    <div class='left'>
+      <h1><a href="/">Assignments</a></h1>
+    </div>
+    <div class='right'>
+      <% if session[:token] %>
+	<%= link_to "Log out", '/logout' %>
+      <% else %>
+	<%= link_to "Log in with GitHub", '/auth/github' %>
+      <% end %>
+    </div>
+  </header>
 <%= yield %>
 
 </body>

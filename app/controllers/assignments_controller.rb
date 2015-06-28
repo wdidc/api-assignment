@@ -64,6 +64,6 @@ class AssignmentsController < ApplicationController
 
   private
   def assignment_params
-    params.require(:assignment).permit(:title, :weekday, :due_date, :repo_url, :rubric_url)
+    params.require(:assignment).permit(:title, :weekday, :due_date, :repo_url, :rubric_url, :assignment_type)
   end
 end
