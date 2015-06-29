@@ -8,7 +8,6 @@
 <% end %>
 
 <% if session[:token] %>
-  <%= link_to "Create new submission", new_assignment_submission_path(@assignment) %>
   <%= link_to "edit", edit_assignment_path(@assignment)%>
   <%= link_to 'delete', assignment_path(@assignment), method: :delete %></p>
 <% end %> 
