@@ -16,9 +16,23 @@
 <% @assignment.submissions.each do |submission| %>
   <div class='submission'>
     <h3><%= link_to submission.student["name"], edit_assignment_submission_path(@assignment, submission) %></h3>
-    <% if submission.status %>
       <small><strong>Status:</strong> <%= submission.status %></small>
-    <% end %>
+      <%= form_for([@assignment, submission]) do |f| %>
+	<p>
+	  <label>
+	    <%= f.radio_button :status, "complete"%>
+	    Complete
+	  </label>
+	  <br>
+	  <label>
+	    <%= f.radio_button :status, "incomplete"%>
+	    Incomplete
+	  </label>
+	</p>
+	<p>
+	  <%= f.submit %>
+	</p>
+      <% end %>
   </div>
 <% end %>
 
