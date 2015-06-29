@@ -1,11 +1,11 @@
 class Submission < ActiveRecord::Base
   belongs_to :assignment
+  @@students = JSON.parse(HTTParty.get("http://api.wdidc.org/students").body)
   def student
-    res = JSON.parse(HTTParty.get("http://api.wdidc.org/students/#{self.github_id}").body)
-    if res.class == Hash
-      return res
-    else
-      return {name:""}
+    @@students.each do |student|
+      if student["github_user_id"] == self.github_id
+	return student
+      end
     end
   end
   def as_json(options={})
