@@ -34,10 +34,11 @@
 <% end %> 
 
   <table>
-  <% @submissions.sort_by{|s| s.student["name"]}.each do |submission| %>
+  <% @submissions.sort_by{|s| s.student["squad"]}.each do |submission| %>
     <tr>
       <!--<%= submission.inspect %>-->
       <th><%= submission.student["name"] %></th>
+      <td><%= submission.student["squad"] %></td>
       <td><a target="_blank" href="<%= @assignment.repo_url %>/issues?q=author%3A<%= submission.student["github_username"] %>">Issues</a></td>
       <td><%= link_to "Details", edit_assignment_submission_path(@assignment, submission) %></td>
       <td class="status">
