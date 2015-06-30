@@ -1,3 +1,24 @@
+<script>
+  $(document).ready(function(){
+    <% if session[:token] %>
+    $(".status input").change(function(){
+      $.ajax({
+        url: "<%= assignment_submissions_path(@assignment) %>/" + this.id,
+        type: "post",
+        dataType: "json",
+        data: {
+          _method: "put",
+          id: this.id,
+          checked: this.checked
+        }
+      }).always(function(response){
+        console.dir(response);
+      });
+    });
+    <% end %>
+  });
+</script>
+
 <h1><%= @assignment.title %></h1>
 <% if @assignment.repo_url != "" %>
 <p><%= link_to "View on GitHub", @assignment.repo_url %></p>
@@ -12,26 +33,18 @@
   <%= link_to 'delete', assignment_path(@assignment), method: :delete %></p>
 <% end %> 
 
-<% @assignment.submissions.each do |submission| %>
+<% @submissions.sort_by{|s| s.student["name"]}.each do |submission| %>
   <div class='submission'>
-    <h3><%= link_to submission.student["name"], edit_assignment_submission_path(@assignment, submission) %></h3>
-      <small><strong>Status:</strong> <%= submission.status %></small>
-      <%= form_for([@assignment, submission]) do |f| %>
-	<p>
-	  <label>
-	    <%= f.radio_button :status, "complete"%>
-	    Complete
-	  </label>
-	  <br>
-	  <label>
-	    <%= f.radio_button :status, "incomplete"%>
-	    Incomplete
-	  </label>
-	</p>
-	<p>
-	  <%= f.submit %>
-	</p>
-      <% end %>
+<%= submission.inspect %>
+    <h3><%= submission.student["name"] %></h3>
+    <ul>
+      <li><a target="_blank" href="<%= @assignment.repo_url %>/issues?q=author%3A<%= submission.student["github_username"] %>">GitHub Issues</a></li>
+      <li><%= link_to "Submission Details", edit_assignment_submission_path(@assignment, submission) %></li>
+      <li class="status">
+        <%= check_box_tag submission.id, submission.status === "complete" %>
+        <label for="<%= submission.id %>">Complete</label>
+      </li>
+    </ul>
   </div>
 <% end %>
 
@@ -40,3 +53,4 @@ t.integer  "github_id"
 t.string   "html_url"
 t.string   "repo_url"
 t.string   "status" -->
+
