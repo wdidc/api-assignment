@@ -27,7 +27,7 @@ class SubmissionsController < ApplicationController
     @submission = Submission.find(params[:id])
     respond_to do |format|
       format.html
-      format.json { render status: 200, json: @submissions.to_json }
+      format.json { render status: 200, json: @submission.to_json }
     end
   end
 
@@ -53,7 +53,7 @@ class SubmissionsController < ApplicationController
     if @submission.update(status: params[:checked] ? "complete" : "incomplete")
       respond_to do |format|
         format.html {redirect_to assignment_path(@submission.assignment) }
-        format.json {render json: @assignment}
+        format.json {render json: @submission}
       end
     end
   end
