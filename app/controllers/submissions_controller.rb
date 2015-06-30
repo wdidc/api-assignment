@@ -50,7 +50,7 @@ class SubmissionsController < ApplicationController
 
   def update
     @submission = Submission.find(params[:id])
-    if @submission.update(status: params[:checked] ? "complete" : "incomplete")
+    if @submission.update(status: params[:checked] === "true" ? "complete" : "incomplete")
       respond_to do |format|
         format.html {redirect_to assignment_path(@submission.assignment) }
         format.json {render json: @submission}

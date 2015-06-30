@@ -27,7 +27,7 @@ a{
 
 body{
   font-family:'Helvetica Neue', sans-serif;
-  max-width:40em;
+  max-width:800px;
   margin:auto;
   padding:2em 1em;
 }
@@ -51,4 +51,59 @@ h1 a{
 
 .submission h3{
   margin:0;
+}
+
+input[type=checkbox]
+{
+  position:absolute;
+  width:1px;
+  height:1px;
+  opacity:0.01;
+  overflow:hidden;
+}
+label
+{
+  cursor:pointer;
+}
+li
+{
+  margin:5px 0;
+}
+input+label
+{
+  background-color:#ffaaaa;
+  padding:5px 10px;
+  border-radius:5px;
+  border:1px solid transparent;
+}
+input:checked+label
+{
+  background-color:#cceecc;
+}
+input+label:hover
+{
+  border-color:#333;
+}
+input+label:after
+{
+  content:"?";
+}
+input:checked+label:after
+{
+  content:"!";
+}
+
+table
+{
+  border-spacing:0;
+  width:100%;
+}
+td,th
+{
+  padding:10px 20px;
+  text-align:left;
+}
+tr:nth-of-type(even)>*
+{
+  background-color:#f3f3f3;
 }
