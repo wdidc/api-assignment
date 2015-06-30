@@ -1,7 +1,7 @@
 class AssignmentsController < ApplicationController
   def index
     @assignment = Assignment.new
-    @assignments = Assignment.all
+    @assignments = Assignment.order(updated_at: :desc)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @assignments}
