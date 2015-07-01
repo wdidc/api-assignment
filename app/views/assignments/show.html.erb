@@ -31,12 +31,13 @@
 <% if session[:token] %>
   <%= link_to "edit", edit_assignment_path(@assignment)%>
   <%= link_to 'delete', assignment_path(@assignment), method: :delete %></p>
-<% end %> 
+<% end %>
 
   <table>
-    <% @submissions.sort_by{|s| if !s.try("squad") then next else s.student["squad"] end }.each do |submission| %>
+    <% @submissions.select{|s| s.student.class != Array }.sort_by{|s| s.student["squad"] }.each do |submission| %>
     <tr>
       <!--<%= submission.inspect %>-->
+      <%= raise submission.to_yaml %>
       <th><%= submission.student["name"] %></th>
       <td><a target="_blank" href="<%= @assignment.repo_url ? "#{@assignment.repo_url}/issues?q=#{submission.involves_squad}" : "#" %>"><%= submission.student["squad"] %></a></td>
       <td><a target="_blank" href="<%= @assignment.repo_url %>/issues?q=author%3A<%= submission.student["github_username"] %>">Issues</a></td>
@@ -54,4 +55,3 @@ t.integer  "github_id"
 t.string   "html_url"
 t.string   "repo_url"
 t.string   "status" -->
-

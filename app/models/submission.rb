@@ -7,11 +7,7 @@ class Submission < ActiveRecord::Base
   end
 
   def student
-    @@students.each do |student|
-      if student["github_user_id"] == self.github_id
-	return student
-      end
-    end
+    return @@students.find{|s| s["github_user_id"] == self.github_id }
   end
 
   def as_json(options={})
