@@ -87,3 +87,6 @@ Make the Callback URL: `http://localhost:3000/auth/github/callback`
 github_client_id: "your client id"
 github_client_secret: "your client id"
 ```
+
+
+## Trivial Update
