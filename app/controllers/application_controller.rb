@@ -1,38 +1,49 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  # protect_from_forgery with: :exception
   after_filter :set_access_control_headers
   skip_before_filter :verify_authenticity_token
   before_action :authenticate_user!, only: [:destroy,:update,:create]
+
   def set_access_control_headers
       headers['Access-Control-Allow-Origin'] = "*"
       headers['Access-Control-Request-Method'] = %w{GET POST OPTIONS}.join(",")
   end
+
   def logout
     session.clear
     redirect_to root_path
   end
+
+  def authenticate
+    token = request.env['omniauth.auth'][:credentials][:token]
+    session[:token] = token
+    if session[:token]
+      redirect_to root_path
+    else
+      error json:{error: "not authorized"}
+    end
+  end
+
   private
   def authenticate_user!
-    unless session[:token] && is_an_instructor?
+    unless has_api_token? || is_an_instructor?
       render json: {error:"Not Authorized"}
     end
   end
+
+  def has_api_token?
+    params[:api_token] && params[:api_token] == ENV["ASSIGNMENTS_API_TOKEN"]
+  end
+
   def is_an_instructor?
-    if session[:token]
-    # get all instructors
-    instructors = HTTParty.get("https://api.github.com/teams/1511667/members?access_token=#{session[:token]}")
-    user = HTTParty.get("https://api.github.com/user?access_token=#{session[:token]}")
+    return false unless session[:token]
+
     begin
-      instructors.each do |instructor|
-        if user[:id] == instructor[:id]
-          return true
-        end
-      end
+      # get all instructors
+      instructors = HTTParty.get("https://api.github.com/teams/1511667/members?access_token=#{session[:token]}")
+      user = HTTParty.get("https://api.github.com/user?access_token=#{session[:token]}")
+      return true if instructors.map(&:id).include? user[:id]
     rescue
     end
-    return false
-    end
   end
+
 end

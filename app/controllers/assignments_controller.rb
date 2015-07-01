@@ -52,16 +52,6 @@ class AssignmentsController < ApplicationController
     end
   end
 
-  def authenticate
-    token = request.env['omniauth.auth'][:credentials][:token]
-    session[:token] = token
-    if session[:token]
-      redirect_to root_path
-    else
-      error json:{error: "not authorized"}
-    end
-  end
-
   def outcomes
     @assignments = Assignment.where(assignment_type: "outcomes")
   end
