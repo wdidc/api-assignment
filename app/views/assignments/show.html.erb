@@ -34,10 +34,9 @@
 <% end %>
 
   <table>
-    <% @submissions.select{|s| s.student.class != Array }.sort_by{|s| s.student["squad"] }.each do |submission| %>
+    <% @submissions.sort_by{|s| s.student["squad"] }.each do |submission| %>
     <tr>
       <!--<%= submission.inspect %>-->
-      <%= raise submission.to_yaml %>
       <th><%= submission.student["name"] %></th>
       <td><a target="_blank" href="<%= @assignment.repo_url ? "#{@assignment.repo_url}/issues?q=#{submission.involves_squad}" : "#" %>"><%= submission.student["squad"] %></a></td>
       <td><a target="_blank" href="<%= @assignment.repo_url %>/issues?q=author%3A<%= submission.student["github_username"] %>">Issues</a></td>
