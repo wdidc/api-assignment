@@ -72,3 +72,18 @@ GET /assignments/students/:github_id
     $ rake db:migrate
     $ rake db:seed
     $ rails s
+
+### Authentication with GitHub
+
+First, create a new application on GitHub - https://github.com/settings/applications/new
+
+Make the Callback URL: `http://localhost:3000/auth/github/callback`
+
+    $ figaro install
+
+```rb
+# config/application.yml
+
+github_client_id: "your client id"
+github_client_secret: "your client id"
+```
