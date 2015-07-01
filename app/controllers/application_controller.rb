@@ -13,6 +13,16 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
 
+  def authenticate
+    token = request.env['omniauth.auth'][:credentials][:token]
+    session[:token] = token
+    if session[:token]
+      redirect_to root_path
+    else
+      error json:{error: "not authorized"}
+    end
+  end
+
   private
   def authenticate_user!
     unless has_api_token? || is_an_instructor?
@@ -21,7 +31,7 @@ class ApplicationController < ActionController::Base
   end
 
   def has_api_token?
-    params[:api_token] == ENV["ASSIGNMENTS_API_TOKEN"]
+    params[:api_token] && params[:api_token] == ENV["ASSIGNMENTS_API_TOKEN"]
   end
 
   def is_an_instructor?
