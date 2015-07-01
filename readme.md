@@ -65,8 +65,8 @@ GET /assignments/students/:github_id
 
 ## Local Setup
 
-    $ git clone git@github.com:wdidc/api-assignment.git
-    $ cd api-assignment
+    $ git clone git@github.com:wdidc/assignments.git
+    $ cd assignments
     $ bundle install
     $ rake db:create
     $ rake db:migrate
