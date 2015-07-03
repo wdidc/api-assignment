@@ -33,7 +33,7 @@ class ApplicationController < ActionController::Base
   end
 
   def has_api_token?
-    params[:api_token] && params[:api_token] == ENV["ASSIGNMENTS_API_TOKEN"]
+    params[:api_token] && params[:api_token] == ENV['assignments_api_token']
   end
 
   def is_an_instructor?
