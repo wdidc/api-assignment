@@ -25,13 +25,11 @@ class ApplicationController < ActionController::Base
 
   private
   def authenticate_user!
-    unless is_an_instructor? || has_api_token?
-      render json: {
-	error:"Not Authorized", 
-	more_info:"You either need to be a member of the wdidc organization, or provide an api token.",
-        documentation: "https://github.com/wdidc/assignments"
-      }
-    end
+    errors = []
+    errors << {error:"Not an instructor"} unless is_an_instructor?
+    binding.pry
+    errors << {error:"Missing valid api token"} unless has_api_token?
+    render json: errors unless errors.empty?
   end
 
   def has_api_token?
@@ -39,11 +37,12 @@ class ApplicationController < ActionController::Base
   end
 
   def is_an_instructor?
-    return false unless session[:token]
+    token = session[:token] || params[:access_token]
+    return false unless token
     begin
       # get all instructors
-      instructors = JSON.parse(HTTParty.get("https://api.github.com/teams/1511667/members?access_token=#{session[:token]}").body)
-      user = HTTParty.get("https://api.github.com/user?access_token=#{session[:token]}")
+      instructors = JSON.parse(HTTParty.get("https://api.github.com/teams/1511667/members?access_token=#{token}").body)
+      user = HTTParty.get("https://api.github.com/user?access_token=#{token}")
       return true if instructors.map{|i|i["id"]}.include? user["id"]
     rescue
     end
