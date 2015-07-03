@@ -25,8 +25,8 @@ class ApplicationController < ActionController::Base
 
   private
   def authenticate_user!
-    unless has_api_token? || is_an_instructor?
-      render json: {error:"Not Authorized"}
+    unless is_an_instructor? || has_api_token?
+      render json: {error:"Not an instructor"}
     end
   end
 
@@ -36,12 +36,11 @@ class ApplicationController < ActionController::Base
 
   def is_an_instructor?
     return false unless session[:token]
-
     begin
       # get all instructors
-      instructors = HTTParty.get("https://api.github.com/teams/1511667/members?access_token=#{session[:token]}")
+      instructors = JSON.parse(HTTParty.get("https://api.github.com/teams/1511667/members?access_token=#{session[:token]}").body)
       user = HTTParty.get("https://api.github.com/user?access_token=#{session[:token]}")
-      return true if instructors.map(&:id).include? user[:id]
+      return true if instructors.map{|i|i["id"]}.include? user["id"]
     rescue
     end
   end
