@@ -27,7 +27,6 @@ class ApplicationController < ActionController::Base
   def authenticate_user!
     errors = []
     errors << {error:"Not an instructor"} unless is_an_instructor?
-    binding.pry
     errors << {error:"Missing valid api token"} unless has_api_token?
     render json: errors unless errors.empty?
   end
