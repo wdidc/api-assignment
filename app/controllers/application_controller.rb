@@ -26,7 +26,11 @@ class ApplicationController < ActionController::Base
   private
   def authenticate_user!
     unless is_an_instructor? || has_api_token?
-      render json: {error:"Not an instructor"}
+      render json: {
+	error:"Not Authorized", 
+	more_info:"You either need to be a member of the wdidc organization, or provide an api token.",
+        documentation: "https://github.com/wdidc/assignments"
+      }
     end
   end
 
