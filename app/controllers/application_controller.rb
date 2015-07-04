@@ -25,12 +25,11 @@ class ApplicationController < ActionController::Base
 
   private
   def authenticate_user!
+    if is_an_instructor?
+      return true
+    end
     unless has_api_token?
       render json: {error:"Missing valid api token"}
-      return
-    end
-    unless is_an_instructor?
-      render json: {error:"Not an instructor"}
       return
     end
   end

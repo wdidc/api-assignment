@@ -51,7 +51,7 @@ class SubmissionsController < ApplicationController
   def update
     @submission = Submission.find(params[:id])
     attrs = submission_params 
-    if params[:checked] == "true"
+    if params[:submission][:checked] == "true"
       attrs[:status] = "complete"
     end
     if @submission.update(attrs)

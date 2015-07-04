@@ -8,8 +8,10 @@
         dataType: "json",
         data: {
           _method: "put",
-          id: this.id,
-          checked: this.checked
+	  submission: { 
+	    id: this.id,
+	    checked: this.checked
+	  }
         }
       }).always(function(response){
         console.dir(response);
