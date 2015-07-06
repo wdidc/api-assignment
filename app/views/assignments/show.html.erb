@@ -36,7 +36,7 @@
 <% end %>
 
   <table>
-    <% @submissions.sort_by{|s| s.student["squad"] }.each do |submission| %>
+    <% @submissions.each do |submission| %>
     <tr>
       <!--<%= submission.inspect %>-->
       <th><%= submission.student["name"] %></th>
