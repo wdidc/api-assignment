@@ -1,5 +1,5 @@
 class Assignment < ActiveRecord::Base
-  has_many :submissions
+  has_many :submissions, dependent: :destroy
   after_create :seed_submissions
   private
   def seed_submissions
