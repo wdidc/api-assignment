@@ -39,14 +39,14 @@
     <% @submissions.each do |submission| %>
     <tr>
       <!--<%= submission.student["github_username"].html_safe %>-->
-      <th><%= submission.student["name"] %></th>
+      <th><%= link_to submission.student["name"], edit_assignment_submission_path(@assignment, submission)  %></th>
       <% if @issues[submission.student["github_username"].html_safe] %> 
 	<td><%= link_to "issue", @issues[submission.student["github_username"].html_safe][:url]%></td>
+	<td><%= simple_format @issues[submission.student["github_username"].html_safe][:comments]%></td>
       <% else %>
 	<td>no issue!</td>
+	<td></td>
       <% end %>
-      <td><a target="_blank" href="<%= @assignment.repo_url ? "#{@assignment.repo_url}/issues?q=#{submission.involves_squad}" : "#" %>"><%= submission.student["squad"] %></a></td>
-      <td><%= link_to "Details", edit_assignment_submission_path(@assignment, submission) %></td>
       <td class="status">
         <%= check_box_tag submission.id, true, submission.status === "complete" %>
         <label for="<%= submission.id %>">Complete</label>
@@ -54,9 +54,3 @@
     </tr>
   <% end %>
   </table>
-
-<!-- t.integer  "assignment_id"
-t.integer  "github_id"
-t.string   "html_url"
-t.string   "repo_url"
-t.string   "status" -->
