@@ -4,7 +4,6 @@ gem 'omniauth'
 gem 'unicorn'
 gem 'omniauth-github'
 gem 'httparty'
-gem 'pry'
 gem 'rack-cors', :require => 'rack/cors'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
@@ -38,7 +37,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  # Call 'binding.pry' anywhere in the code to stop execution and get a pry console
+  gem 'pry-byebug' # adds debugger like functionality to pry (next, step, continue, breakpoints, etc)
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
