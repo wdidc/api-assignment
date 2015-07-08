@@ -13,7 +13,7 @@ class AssignmentsController < ApplicationController
       @submissions = @assignment.submissions.sort_by{ |s| s.student["squad"] }
       @issues = {}
       if @assignment.repo_url
-	url = "https://api.github.com/repos/" + @assignment.repo_url.gsub(/https:\/\/github\.com\//,"") + "/issues?access_token="+session[:token]
+	url = "https://api.github.com/repos/" + @assignment.repo_url.gsub(/https:\/\/github\.com\//,"") + "/issues?state=all&access_token="+session[:token]
 	issues = JSON.parse(HTTParty.get(url).body)
 	issues.each do |issue|
           @issues[issue["user"]["login"]] = {
