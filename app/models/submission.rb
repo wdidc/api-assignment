@@ -11,7 +11,11 @@ class Submission < ActiveRecord::Base
   end
 
   def as_json(options={})
-    super.as_json(options).merge({assignment_title: assignment_title, assignment_type: assignment_type})
+    super.as_json(options).merge({
+      assignment_title: assignment_title, 
+      assignment_type: assignment_type,
+      student_name: student["name"]
+    })
   end
 
   def assignment_title
