@@ -11,23 +11,7 @@ class AssignmentsController < ApplicationController
   def show
       @assignment = Assignment.find_by(weekday: params[:id]) || Assignment.find(params[:id])
       @submissions = @assignment.submissions.sort_by{ |s| s.student["squad"] }
-      @issues = {}
-      begin
-	if @assignment.repo_url 
-	  url = "https://api.github.com/repos/" + @assignment.repo_url.gsub(/https:\/\/github\.com\//,"") + "/issues?state=all&access_token="+session[:token]
-	  issues = JSON.parse(HTTParty.get(url).body)
-	  issues.each do |issue|
-	    @issues[issue["user"]["login"]] = {
-	      url: issue["html_url"],
-	      comments: issue["body"]
-	    }
-	  end
-	else
-	  @issues = []
-	end
-      rescue
-        @issues = []
-      end
+      @issues = @assignment.issues session[:token]
       @students = Student.all
       respond_to do |format|
         format.html
