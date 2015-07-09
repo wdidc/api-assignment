@@ -14,7 +14,7 @@ class Assignment < ActiveRecord::Base
 	end
 	@issues = {}
 	isshs.each do |issue|
-	  @issues[issue["user"]["login"]] = {
+	  @issues[issue["user"]["id"]] = {
 	    url: issue["html_url"],
 	    comments: issue["body"]
 	  }

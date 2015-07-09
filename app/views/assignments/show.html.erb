@@ -38,11 +38,10 @@
   <table>
     <% @submissions.each do |submission| %>
     <tr>
-      <!--<%= submission.student["github_username"].html_safe %>-->
       <th><%= link_to submission.student["name"], edit_assignment_submission_path(@assignment, submission)  %></th>
-      <% if @issues[submission.student["github_username"].html_safe] %> 
-	<td><%= link_to "issue", @issues[submission.student["github_username"].html_safe][:url]%></td>
-	<td><%= simple_format @issues[submission.student["github_username"].html_safe][:comments]%></td>
+      <% if @issues[submission.student["github_user_id"]] %> 
+	<td><%= link_to "issue", @issues[submission.student["github_user_id"]][:url]%></td>
+	<td><%= simple_format @issues[submission.student["github_user_id"]][:comments]%></td>
       <% else %>
 	<td>no issue!</td>
 	<td></td>
