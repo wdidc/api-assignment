@@ -9,7 +9,6 @@ class Assignment < ActiveRecord::Base
 	isshs << JSON.parse(res.body)
 	isshs.flatten!(1)
 	next_url = res.headers["link"].match(/<(.*)>; rel="next"/)
-	binding.pry
 	if next_url[1]
 	  self.issues(token, next_url[1], isshs)
 	end
