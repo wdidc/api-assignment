@@ -14,12 +14,17 @@ class Submission < ActiveRecord::Base
     super.as_json(options).merge({
       assignment_title: assignment_title, 
       assignment_type: assignment_type,
+      assignment_repo_url: assignment_repo_url,
       student_name: student["name"]
     })
   end
 
   def assignment_title
     self.assignment && self.assignment.title
+  end
+
+  def assignment_repo_url
+    self.assignment && self.assignment.repo_url
   end
 
   def assignment_type
