@@ -113,3 +113,6 @@ td.closed {
 td.open {
   background-color: #ffdca9;
 }
+td.missing {
+  background-color: #ff9d94;
+}

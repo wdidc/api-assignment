@@ -44,7 +44,7 @@
           <td class=<%= issue[:state] %>><%= link_to issue_label, issue[:url]%></td>
           <td><%= simple_format issue[:comments]%></td>
         <% else %>
-          <td>no issue!</td>
+          <td class="missing">no issue!</td>
           <td></td>
         <% end %>
         <td class="status">
