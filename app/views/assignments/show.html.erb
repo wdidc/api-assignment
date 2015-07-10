@@ -40,8 +40,13 @@
     <tr>
       <!--<%= submission.inspect %>-->
       <th>
-        <%= link_to_if(is_an_instructor?, submission.student["name"], student_url(submission.student),  title: "To Student Tracker", target: '_blank') %>
+        <%= submission.student["name"] %>
       </th>
+      <% if is_an_instructor? %>
+      <td>
+        <%= link_to("Tracker", student_url(submission.student),  title: "To Student Tracker", target: '_blank') %>
+      </td>
+      <% end %>
       <td><a target="_blank" href="<%= @assignment.repo_url ? "#{@assignment.repo_url}/issues?q=#{submission.involves_squad}" : "#" %>"><%= submission.student["squad"] %></a></td>
       <td><a target="_blank" href="<%= @assignment.repo_url %>/issues?q=author%3A<%= submission.student["github_username"] %>">Issues</a></td>
       <td><%= link_to "Details", edit_assignment_submission_path(@assignment, submission) %></td>
