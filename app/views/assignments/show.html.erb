@@ -8,10 +8,10 @@
         dataType: "json",
         data: {
           _method: "put",
-	  submission: {
-	    id: this.id,
-	    checked: this.checked
-	  }
+          submission: {
+            id: this.id,
+            checked: this.checked
+          }
         }
       }).always(function(response){
         console.dir(response);
@@ -22,10 +22,13 @@
 </script>
 
 <h1><%= @assignment.title %></h1>
+
 <% if @assignment.repo_url != "" %>
-<p><%= link_to "View on GitHub", @assignment.repo_url %></p>
+  <p><%= link_to "View on GitHub", @assignment.repo_url %></p>
 <% end %>
+
 <p>Type: <%= @assignment.assignment_type %></p>
+
 <% if @assignment.due_date != "" %>
   <p>Due Date: <%= @assignment.due_date %></p>
 <% end %>
@@ -35,21 +38,21 @@
   <%= link_to 'delete', assignment_path(@assignment), method: :delete %></p>
 <% end %>
 
-  <table>
-    <% @submissions.each do |submission| %>
+<table>
+  <% @submissions.each do |submission| %>
     <tr>
       <th><%= link_to submission.student["name"], edit_assignment_submission_path(@assignment, submission)  %></th>
       <% if is_an_instructor? %>
-      <td>
-        <%= link_to("Tracker", student_url(submission.student),  title: "To Student Tracker", target: '_blank') %>
-      </td>
+        <td>
+          <%= link_to("Tracker", student_url(submission.student),  title: "To Student Tracker", target: '_blank') %>
+        </td>
       <% end %>
-      <% if @issues[submission.student["github_user_id"]] %> 
-	<td><%= link_to "issue", @issues[submission.student["github_user_id"]][:url]%></td>
-	<td><%= simple_format @issues[submission.student["github_user_id"]][:comments]%></td>
+      <% if @issues[submission.student["github_user_id"]] %>
+        <td><%= link_to "issue", @issues[submission.student["github_user_id"]][:url]%></td>
+        <td><%= simple_format @issues[submission.student["github_user_id"]][:comments]%></td>
       <% else %>
-	<td>no issue!</td>
-	<td></td>
+        <td>no issue!</td>
+        <td></td>
       <% end %>
 
       <td class="status">
@@ -58,4 +61,4 @@
       </td>
     </tr>
   <% end %>
-  </table>
+</table>
