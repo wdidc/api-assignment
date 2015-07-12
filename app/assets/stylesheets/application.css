@@ -107,3 +107,12 @@ tr:nth-of-type(even)>*
 {
   background-color:#f3f3f3;
 }
+td.closed {
+  background-color: #cceecc;
+}
+td.open {
+  background-color: #ffdca9;
+}
+td.missing {
+  background-color: #ff9d94;
+}
