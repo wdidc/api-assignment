@@ -14,3 +14,22 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(function(){
+  $(".status input").change(function(){
+    $.ajax({
+      url: $(this).attr("data-submit"),
+      type: "post",
+      dataType: "json",
+      data: {
+	_method: "put",
+	submission: {
+	  id: this.id,
+	  checked: this.checked
+	}
+      }
+    }).always(function(response){
+      console.dir(response);
+    });
+  });
+})
