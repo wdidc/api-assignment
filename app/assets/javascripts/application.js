@@ -25,7 +25,7 @@ $(function(){
 	_method: "put",
 	submission: {
 	  id: this.id,
-	  checked: this.checked
+	  status: this.checked ? "complete" : "incomplete"
 	}
       }
     }).always(function(response){
