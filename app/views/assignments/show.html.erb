@@ -25,10 +25,12 @@
           <td class="missing">no issue!</td>
           <td></td>
         <% end %>
-        <td class="status">
-	  <%= check_box_tag submission.id, true, submission.status === "complete", :"data-submit" => assignment_submissions_path(@assignment) + "/#{submission.id}" %>
-          <label for="<%= submission.id %>">Complete</label>
-        </td>
+          <td class="status">
+            <% if submission.assignment.assignment_type == "homework" %>
+  	         <%= check_box_tag submission.id, true, submission.status === "complete", :"data-submit" => assignment_submissions_path(@assignment) + "/#{submission.id}" %>
+             <label for="<%= submission.id %>">Complete</label>
+            <% end %>
+          </td>
       </tr>
     <% end %>
   </table>

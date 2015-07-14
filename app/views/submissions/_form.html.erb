@@ -1,8 +1,7 @@
 <%= form_for([@assignment, @submission]) do |f| %>
-  <p>
-    <%= f.label :github_id %><br>
-    <%= f.select :github_id, @students.collect{|s| [ s["name"], s["github_user_id"]]}%>
-  </p>
+  <h2>
+    <%= @submission.student["name"] %>
+  </h2>
   <p>
     <%= f.label :html_url %><br>
     <%= f.text_area :html_url %>
