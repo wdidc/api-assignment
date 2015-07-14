@@ -52,7 +52,7 @@ class SubmissionsController < ApplicationController
     @submission = Submission.find(params[:id])
     if @submission.update(submission_params)
       respond_to do |format|
-        format.html {redirect_to assignment_path(@submission.assignment) }
+        format.html {redirect_to @submission}
         format.json {render json: @submission}
       end
     end
