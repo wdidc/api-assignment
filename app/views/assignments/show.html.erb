@@ -20,7 +20,7 @@
         <% if issue %>
           <% issue_label = (issue[:state] == "open" ? "issue*" : "issue") %>
           <td class=<%= issue[:state] %>><%= link_to issue_label, issue[:url]%></td>
-          <td><%= simple_format issue[:comments]%></td>
+          <td><%= markdown(issue[:comments])%></td>
         <% else %>
           <td class="missing">no issue!</td>
           <td></td>
