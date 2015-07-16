@@ -52,7 +52,7 @@ class SubmissionsController < ApplicationController
     @submission = Submission.find(params[:id])
     if @submission.update(submission_params)
       respond_to do |format|
-        format.html {redirect_to @submission}
+        format.html {redirect_to edit_assignment_submission_path(@submission.assignment,@submission)}
         format.json {render json: @submission}
       end
     end
@@ -70,6 +70,6 @@ class SubmissionsController < ApplicationController
   end
   private
   def submission_params
-    params.require(:submission).permit(:github_id, :html_url, :repo_url, :status)
+    params.require(:submission).permit(:github_id, :html_url, :repo_url, :status, :private)
   end
 end
