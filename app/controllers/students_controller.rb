@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController
   def index
-    @submissions = Submission.where(github_id: params[:student_id])
+    @submissions = Submission.where(github_id: params[:student_id], private: [nil,false])
     render json: @submissions
   end
   def show
