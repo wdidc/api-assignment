@@ -53,7 +53,7 @@ h1 a{
   margin:0;
 }
 
-.submission input[type=checkbox]
+.status input[type=checkbox]
 {
   position:absolute;
   width:1px;
