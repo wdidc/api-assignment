@@ -1,3 +1,4 @@
+<%= link_to "Preview", assignment_submission_path(@assignment, @submission) %>
 <%= form_for([@assignment, @submission]) do |f| %>
   <h2>
     <%= @submission.student["name"] %>
