@@ -1,0 +1,38 @@
+// see: http://appendto.com/2014/03/replacing-common-ui-icons-with-css-2/
+// mms (07/2015): trying this to see if we like it.  Not tied to it.
+.icon {
+  position: relative;
+  display: inline-block;
+}
+
+.icon::before,
+.icon::after {
+  content: "";
+  position: absolute;
+}
+
+.icon-home {
+  border-bottom: .938em solid black;
+  border-left: .938em solid transparent;
+  border-right: .938em solid transparent;
+}
+
+.icon-home::before {
+  width: .563em;
+  height: .625em;
+  background: black;
+}
+
+.icon-home::after {
+  width: .563em;
+  height: .625em;
+  background: black;
+}
+
+.icon-home::before {
+  margin: .938em 0 0 -.688em;
+}
+
+.icon-home::after {
+  margin: .938em 0 0 .125em;
+}

@@ -1,4 +1,5 @@
 <% if session[:token] %>
+  <h1>Assignments</h1>
   <table>
   <%= render 'form' %>
   <% @assignments.each do |assignment| %>

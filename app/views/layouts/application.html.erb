@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ApiAssignment</title>
+  <title>Assignments</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application'%>
   <%= csrf_meta_tags %>
 </head>
 <body>
   <header class='cf'>
-    <div class='left'>
-      <h1><a href="/">Assignments</a></h1>
-    </div>
-    <div class='right'>
-      <% if session[:token] %>
-	<%= link_to "Log out", '/logout' %>
-      <% else %>
-	<%= link_to "Log in with GitHub", '/auth/github' %>
-      <% end %>
-    </div>
+    <nav>
+      <ul>
+        <li class="home">
+          <a href="/"><i class="icon icon-home"></i></a>
+        </li>
+        <li class='login'>
+          <% if session[:token] %>
+            <%= link_to "Log out", '/logout' %>
+          <% else %>
+            <%= link_to "Log in with GitHub", '/auth/github' %>
+          <% end %>
+        </li>
+    </nev>
+
   </header>
-<%= yield %>
+  <%= yield %>
 
 </body>
 </html>

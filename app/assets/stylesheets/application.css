@@ -17,9 +17,28 @@
   float:right;
 }
 
-header h1{
-  margin-top:0;
+header {
+  border-bottom: grey solid 2px;
 }
+
+nav .home {
+  float: left;
+}
+
+nav .login {
+  float: right
+}
+
+nav ul {
+  margin: 0;
+}
+
+/* horizontal nav bar */
+nav li {
+  display: inline;
+  padding: 10px;
+}
+
 
 a{
   color:#3F78C0;
@@ -29,15 +48,19 @@ body{
   font-family:'Helvetica Neue', sans-serif;
   max-width:800px;
   margin:auto;
-  padding:2em 1em;
+  padding:0 1em;
 }
 
-h1 a{
+h1 a, h2 a{
   font-inherit;
   color:inherit;
   letter-spacing:-.05em;
   text-decoration:none;
   border-bottom:1px dashed #000;
+}
+
+h1 span{
+  font-size: 0.5em;
 }
 
 .assignment h3{
@@ -53,7 +76,7 @@ h1 a{
   margin:0;
 }
 
-input[type=checkbox]
+.status input[type=checkbox]
 {
   position:absolute;
   width:1px;
@@ -115,4 +138,10 @@ td.open {
 }
 td.missing {
   background-color: #ff9d94;
+}
+
+textarea{
+  font:inherit;
+  width:100%;
+  min-height:400px;
 }
