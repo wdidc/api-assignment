@@ -1,6 +1,6 @@
 class Submission < ActiveRecord::Base
   belongs_to :assignment
-  @@students = JSON.parse(HTTParty.get("http://api.wdidc.org/students").body)
+  @@students = Student.all
 
   def students
     @@students
@@ -12,7 +12,7 @@ class Submission < ActiveRecord::Base
 
   def as_json(options={})
     super.as_json(options).merge({
-      assignment_title: assignment_title, 
+      assignment_title: assignment_title,
       assignment_type: assignment_type,
       assignment_repo_url: assignment_repo_url,
       student_name: student["name"]
