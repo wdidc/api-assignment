@@ -1,6 +1,8 @@
 <%= link_to "Preview", assignment_submission_path(@assignment, @submission) %>
 
 <div autosave>
+  <br>
+  <small>Updated <span class='js-updated-at js-time-ago'><%= @submission.updated_at %></span></small>
   <%= form_for([@assignment, @submission]) do |f|%>
     <h2>
       <%= @submission.student["name"] %>

@@ -32,6 +32,10 @@ $.fn.serializeObject = function()
 };
 
 $(function(){
+  $(".js-time-ago").text(function(){
+    var time = moment(this.innerHTML).format('MMMM Do YYYY, h:mm:ss a')
+    return time
+  })
   $(".status input").change(function(){
     $.ajax({
       url: $(this).attr("data-submit"),
@@ -49,25 +53,43 @@ $(function(){
     });
   });
 
+  $("[autosave] input").on("change", function( event ){
+    var $form = $(event.target).closest("form")
+    save($form, function( response ){
+      var time = moment(response.updated_at).format('MMMM Do YYYY, h:mm:ss a')
+      var $updatedAt = $form.parent().find(".js-updated-at").html( time )
+    })
+  })
 
-  $("[autosave]").on("keyup", isTyping)
+  $("[autosave]").on("keyup", function( event ){
+    var self = this
+    isTyping(event, function( response ){
+      var time = moment(response.updated_at).format('MMMM Do YYYY, h:mm:ssa')
+      var $updatedAt = $(self).find(".js-updated-at").html( time )
+    }) 
+  })
   var typingTimer
-  var isTyping = function isTyping( event ){
+  function isTyping( event, callback ){
+      var $form = $(event.target).closest("form")
       clearTimeout(typingTimer)
-      typingTimer = setTimeout(doneTyping, 5000)
+      typingTimer = setTimeout(function(){
+        save( $form, callback )
+      }, 2000)
   }
-  var doneTyping = function doneTyping(){
-    var $form = $(this).find("form")
+  function save( $form, callback ){
+    data = $form.serializeObject()
+    if( typeof data["submission[private]"] == "object" ){
+      data["submission[private]"] = data["submission[private]"][1]
+    } 
+    data._method = "patch"
     $.ajax({
       url: $form.attr("action"),
       type: "post",
       dataType: "json",
-      data: {
-	_method: "patch",
-	submission: $form.serializeObject()
-      }
+      data: data
     }).always(function(response){
       console.dir(response);
+      callback(response)
     });
   }
 })
