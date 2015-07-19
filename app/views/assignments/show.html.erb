@@ -22,13 +22,21 @@
           <td class=<%= issue[:state] %>><%= link_to issue_label, issue[:url]%></td>
           <td><%= markdown(issue[:comments])%></td>
         <% else %>
-          <td class="missing">no issue!</td>
+	  <% if submission.assignment.assignment_type == "homework" %>
+	    <td class="missing">no issue!</td>
+	  <% else %>
+          <td></td>
+	  <% end %>
           <td></td>
         <% end %>
           <td class="status">
             <% if submission.assignment.assignment_type == "homework" %>
   	         <%= check_box_tag submission.id, true, submission.status === "complete", :"data-submit" => assignment_submissions_path(@assignment) + "/#{submission.id}" %>
              <label for="<%= submission.id %>">Complete</label>
+            <% elsif submission.assignment.assignment_type == "project" %>
+	        <% if submission.status %>
+		  Complete
+		<% end %>
             <% end %>
           </td>
       </tr>
