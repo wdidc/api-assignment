@@ -5,6 +5,7 @@ gem 'rails', '4.2.1'
 # Use postgresql as the database for Active Record
 gem 'pg'
 
+## Sorting remaining gems alphabetically (easier to find, eliminates duplication)
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 gem 'figaro'
@@ -33,10 +34,10 @@ gem 'unicorn'
 # gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  
+  # Call 'byebug' or 'binding.pry' anywhere in the code to stop execution and get a debugger console
+  gem 'pry-byebug'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
+  # gem 'spring' # not useful for these small apps
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 end
