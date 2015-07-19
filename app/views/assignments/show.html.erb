@@ -24,8 +24,10 @@
         <% else %>
 	  <% if submission.assignment.assignment_type == "homework" %>
 	    <td class="missing">no issue!</td>
+	  <% elsif !submission.repo_url.blank? %>
+	    <td><%= link_to "View on GitHub", submission.repo_url %></td>
 	  <% else %>
-          <td></td>
+	    <td></td>
 	  <% end %>
           <td></td>
         <% end %>
