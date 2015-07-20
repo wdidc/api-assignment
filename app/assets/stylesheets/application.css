@@ -143,6 +143,5 @@ td.missing {
 textarea{
   font:inherit;
   width:100%;
-  min-height:200px;
-  overflow:hidden;
+  min-height:400px;
 }
