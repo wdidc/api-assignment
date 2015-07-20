@@ -1,6 +1,9 @@
 <% issue = @issues[submission.student["github_user_id"]] %>
 <tr>
-  <th><%= link_to submission.student["name"], edit_assignment_submission_path(@assignment, submission)  %></th>
+  <th>
+    <%= link_to submission.student["name"], edit_assignment_submission_path(@assignment, submission)  %>
+    <small><%= submission.student["squad"] %></small>
+  </th>
   <% if issue %>
     <% issue_label = (issue[:state] == "open" ? "issue*" : "issue") %>
     <td class=<%= issue[:state] %>><%= link_to issue_label, issue[:url]%></td>
