@@ -32,10 +32,6 @@ $.fn.serializeObject = function()
 };
 
 $(function(){
-  $("textarea").keyup(function(e) {
-    $(this).height(30)
-    $(this).height(this.scrollHeight + parseFloat($(this).css("borderTopWidth")) + parseFloat($(this).css("borderBottomWidth")))
-  })
   $(".js-time-ago").text(function(){
     var time = moment(this.innerHTML).format('MMMM Do YYYY, h:mm:ss a')
     return time
