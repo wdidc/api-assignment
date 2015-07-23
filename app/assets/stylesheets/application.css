@@ -94,10 +94,12 @@ li
 }
 input+label
 {
+  display:block;
   background-color:#ffaaaa;
   padding:5px 10px;
   border-radius:5px;
   border:1px solid transparent;
+  width:100%;
 }
 input:checked+label
 {
@@ -125,6 +127,7 @@ td,th
 {
   padding:10px 20px;
   text-align:left;
+  vertical-align:top;
 }
 tr:nth-of-type(even)>*
 {

@@ -2,8 +2,10 @@
 <tr>
   <th>
     <%= link_to submission.student["name"], edit_assignment_submission_path(@assignment, submission)  %>
-    <small><%= submission.student["squad"] %></small>
   </th>
+  <td>
+    <%= submission.student["squad"] %>
+  </td>
   <% if issue %>
     <% issue_label = (issue[:state] == "open" ? "issue*" : "issue") %>
     <td class=<%= issue[:state] %>><%= link_to issue_label, issue[:url]%></td>
