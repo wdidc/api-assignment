@@ -3,10 +3,6 @@
   <span>(<%= @assignment.assignment_type %>)</span>
 </h1>
 
-<% if @assignment.due_date != "" %>
-  <p>Due Date: <%= @assignment.due_date %></p>
-<% end %>
-
 <% if session[:token] %>
   <%= link_to "edit", edit_assignment_path(@assignment)%>
   <%= link_to 'delete', assignment_path(@assignment), method: :delete, data: {confirm: "Are you sure?"} %>

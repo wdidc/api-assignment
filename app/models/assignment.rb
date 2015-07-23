@@ -8,19 +8,25 @@ class Assignment < ActiveRecord::Base
         res = HTTParty.get(url)
         isshs << JSON.parse(res.body)
         isshs.flatten!(1)
-	if res.headers["link"]
-	  next_url = res.headers["link"].match(/<(.*)>; rel="next"/)
-	  if next_url[1]
-	    self.issues(token, next_url[1], isshs)
-	  end
-	end
+      if res.headers["link"]
+        next_url = res.headers["link"].match(/<(.*)>; rel="next"/)
+        if next_url[1]
+          self.issues(token, next_url[1], isshs)
+        end
+      end
         @issues = {}
         isshs.each do |issue|
-          @issues[issue["user"]["id"]] = {
+          id = issue["user"]["id"]
+          @issues[id] = {
             url: issue["html_url"],
             comments: issue["body"],
             state: issue["state"]
           }
+          ["created", "updated", "closed"].each do |which|
+            if issue["#{which}_at"]
+              @issues[id][which] = DateTime.parse(issue["#{which}_at"])
+            end
+          end
         end
       else
         @issues = {}

@@ -10,7 +10,9 @@ class AssignmentsController < ApplicationController
 
   def show
       @assignment = Assignment.find_by(weekday: params[:id]) || Assignment.find(params[:id])
-      @submissions = @assignment.submissions.sort_by{ |s| s.student["squad"] }
+      @submissions = @assignment.submissions.sort_by do |s|
+        s.student["name"][s.student["name"].index(" ")..-1]
+      end
       @issues = @assignment.issues session[:token]
       @students = Student.all
       respond_to do |format|
