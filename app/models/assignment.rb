@@ -36,6 +36,15 @@ class Assignment < ActiveRecord::Base
     end
     @issues
   end
+
+  def completion_count
+    self.submissions.where(status: "complete").size
+  end
+
+  def completion_rate
+    100 * (self.completion_count.to_f / self.submissions.size).round(2)
+  end
+
   private
   def seed_submissions
     students = Student.all
