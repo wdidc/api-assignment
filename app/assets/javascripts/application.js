@@ -46,8 +46,8 @@ $(function(){
       data: {
         _method: "put",
         submission: {
-          id: input.id,
-          status: input.checked ? "complete" : "incomplete"
+          id: input.prop("id"),
+          status: input.prop("checked") ? "complete" : "incomplete"
         }
       }
     }).done(function(response){
