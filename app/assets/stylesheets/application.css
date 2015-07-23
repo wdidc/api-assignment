@@ -183,7 +183,8 @@ textarea{
   text-decoration:underline;
 }
 
-small {
+aside {
+  float:right;
   font-size:12px;
   font-weight:normal;
 }
