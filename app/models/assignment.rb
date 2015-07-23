@@ -24,7 +24,7 @@ class Assignment < ActiveRecord::Base
           }
           ["created", "updated", "closed"].each do |which|
             if issue["#{which}_at"]
-              @issues[id][which] = DateTime.parse(issue["#{which}_at"])
+              @issues[id][which] = DateTime.parse(issue["#{which}_at"]).advance(hours: -4)
             end
           end
         end
