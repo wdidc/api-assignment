@@ -21,13 +21,7 @@
     <% end %>
   </td>
   <td class="status">
-    <% if submission.assignment.assignment_type == "homework" %>
-      <%= check_box_tag submission.id, true, submission.status === "complete", :"data-submit" => assignment_submissions_path(@assignment) + "/#{submission.id}" %>
-      <label for="<%= submission.id %>">Complete</label>
-    <% elsif submission.assignment.assignment_type == "project" %>
-      <% if submission.status && !submission.status.blank? %>
-        Complete
-      <% end %>
-    <% end %>
+    <%= check_box_tag submission.id, true, submission.status === "complete", :"data-submit" => assignment_submissions_path(@assignment) + "/#{submission.id}" %>
+    <label for="<%= submission.id %>">Complete</label>
   </td>
 </tr>
