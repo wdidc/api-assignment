@@ -50,10 +50,9 @@ $(function(){
           status: input.checked ? "complete" : "incomplete"
         }
       }
-    }).done(function(){
-      input.prop("disabled", false);
-    }).fail(function(response){
+    }).done(function(response){
       console.dir(response);
+      input.prop("disabled", false);
     });
   });
 
