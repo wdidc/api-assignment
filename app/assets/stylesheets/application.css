@@ -3,6 +3,11 @@
  *= require_self
  */
 
+ *
+ {
+   box-sizing:border-box;
+ }
+
 .cf:after{
   content:' ';
   display: table;
@@ -46,9 +51,10 @@ a{
 
 body{
   font-family:'Helvetica Neue', sans-serif;
-  max-width:800px;
+  max-width:1000px;
   margin:auto;
-  padding:0 1em;
+  padding:1em;
+  padding-top:0;
 }
 
 h1 a, h2 a{
@@ -127,20 +133,31 @@ td,th
 {
   padding:10px 20px;
   text-align:left;
+  max-width:400px;
+  overflow-x:hidden;
   vertical-align:top;
+  line-height:1.6em;
+  text-overflow:ellipsis;
+}
+td a
+{
+  word-break:break-word;
 }
 tr:nth-of-type(even)>*
 {
   background-color:#f3f3f3;
 }
-td.closed {
+th.closed {
   background-color: #cceecc;
 }
-td.open {
+th.open {
   background-color: #ffdca9;
 }
-td.missing {
+th.missing {
   background-color: #ff9d94;
+}
+td img {
+  max-width:400px;
 }
 
 textarea{
