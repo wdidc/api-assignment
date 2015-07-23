@@ -123,6 +123,14 @@ input:checked+label:after
 {
   content:"!";
 }
+input:disabled+label{
+  background-color:#eee;
+  color:#ccc;
+  cursor:default;
+}
+input:disabled+label:hover{
+  border-color:transparent;
+}
 
 table
 {
@@ -133,7 +141,7 @@ td,th
 {
   padding:10px 20px;
   text-align:left;
-  max-width:400px;
+  max-width:800px;
   overflow-x:hidden;
   vertical-align:top;
   line-height:1.6em;
@@ -147,15 +155,6 @@ tr:nth-of-type(even)>*
 {
   background-color:#f3f3f3;
 }
-th.closed {
-  background-color: #cceecc;
-}
-th.open {
-  background-color: #ffdca9;
-}
-th.missing {
-  background-color: #ff9d94;
-}
 td img {
   max-width:400px;
 }
@@ -164,4 +163,22 @@ textarea{
   font:inherit;
   width:100%;
   min-height:400px;
+}
+.dates {
+  font-family:monospace;
+  list-style-type:none;
+  padding:0;
+  line-height:12px;
+}
+.x:before {
+  content:"\02717";
+  color:red;
+}
+.ish {
+  display:block;
+  text-decoration:none;
+}
+.ish:hover {
+  color:#369;
+  text-decoration:underline;
 }
