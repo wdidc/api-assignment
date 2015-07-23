@@ -4,7 +4,10 @@
   <%= render 'form' %>
   <% @assignments.each do |assignment| %>
     <tr>
-      <th><%= link_to "#{assignment.title}, (-#{assignment.submissions.size - assignment.completion_count}, %#{assignment.completion_rate})", assignment_path(assignment) %></th>
+      <th>
+        <%= link_to "#{assignment.title}", assignment_path(assignment) %>
+        <small>(<%= "%#{assignment.completion_rate} -#{assignment.submissions.size - assignment.completion_count}" %>)</small>
+      </th>
       <td><%= assignment.assignment_type %></td>
       <td><%= link_to repo_name(assignment.repo_url), assignment.repo_url %></td>
       <td><%= assignment.due_date %></td>

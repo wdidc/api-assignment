@@ -182,3 +182,8 @@ textarea{
   color:#369;
   text-decoration:underline;
 }
+
+small {
+  font-size:12px;
+  font-weight:normal;
+}

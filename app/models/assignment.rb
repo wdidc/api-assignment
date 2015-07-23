@@ -42,7 +42,7 @@ class Assignment < ActiveRecord::Base
   end
 
   def completion_rate
-    100 * (self.completion_count.to_f / self.submissions.size).round(2)
+    (100 * (self.completion_count.to_f / self.submissions.size)).round(0)
   end
 
   private
