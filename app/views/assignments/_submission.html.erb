@@ -1,8 +1,9 @@
 <% issue = @issues[submission.student["github_user_id"]] %>
 <tr>
   <th>
-    <%= link_to submission.student["name"], edit_assignment_submission_path(@assignment, submission)  %><br />
-    <%= submission.student["squad"] %><br />
+    <%= submission.student["name"] %><br />
+    (<%= submission.student["squad"] %>)<br />
+    <%= link_to "Edit", edit_assignment_submission_path(@assignment, submission) %>
   </th>
   <td>
     <% if issue %>
@@ -13,7 +14,8 @@
         <% ["created", "updated", "closed"].each do |which| %>
           <li><%= "#{which.capitalize}: #{issue[which] ? issue[which].strftime("%a %m/%d %I:%M %P") : "<span class='x'></span>"}".html_safe %></li>
         <% end %>
-        <li><a class="ish" href="<%= issue[:url] %>" target="_blank">View</a></li>
+        <li><a class="ish" target="_blank" href="<%= issue[:url] %>">View Issue</a></li>
+        <li><a class="ish" target="_blank" href="<%= @assignment.repo_url.sub("ga-dc", submission.student["github_username"]) %>">View Fork, if exists</a></li>
       </ul>
       <%= markdown(issue[:comments]) %>
     <% else %>
