@@ -18,12 +18,16 @@
         <li><a class="ish" target="_blank" href="<%= @assignment.repo_url.sub("ga-dc", submission.student["github_username"]) %>">View Fork, if exists</a></li>
       </ul>
       <%= markdown(issue[:comments]) %>
-    <% else %>
+    <% elsif @assignment.assignment_type == "homework" %>
       <span class="x"></span>
     <% end %>
   </td>
   <td class="status">
-    <%= check_box_tag submission.id, true, submission.status === "complete", :"data-submit" => assignment_submissions_path(@assignment) + "/#{submission.id}" %>
-    <label for="<%= submission.id %>">Complete</label>
+    <% if @assignment.assignment_type == "homework" %>
+      <%= check_box_tag submission.id, true, submission.status === "complete", :"data-submit" => assignment_submissions_path(@assignment) + "/#{submission.id}" %>
+      <label for="<%= submission.id %>">Complete</label>
+    <% else %>
+      <%= submission.status %>
+    <% end %>
   </td>
 </tr>
