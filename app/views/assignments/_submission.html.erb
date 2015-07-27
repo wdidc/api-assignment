@@ -2,7 +2,7 @@
 <tr>
   <th>
     <%= submission.student["name"] %><br />
-    (<%= submission.student["squad"] %>)<br />
+    (<a href="<%= "#{@assignment.repo_url}/issues?q=#{submission.involves_squad}" %>" target="_blank"><%= submission.student["squad"] %></a>)<br />
     <%= link_to "Edit", edit_assignment_submission_path(@assignment, submission) %>
   </th>
   <td>
