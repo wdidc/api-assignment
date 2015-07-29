@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/outcomes', to: "assignments#outcomes"
   root 'assignments#index'
   get 'assignments/students/:student_id', to: "students#index"
+  get 'assignments/student', to: "students#index"
   resources :assignments do
     get 'students/:student_id', to: "students#show"
     resources :submissions
