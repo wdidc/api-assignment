@@ -1,6 +1,11 @@
 class StudentsController < ApplicationController
   def index
-    @submissions = Submission.where(github_id: params[:student_id], private: [nil,false])
+    if params[:student_id]
+      @submissions = Submission.where(github_id: params[:student_id], private: [nil,false])
+    elsif params[:access_token]
+      id = JSON.parse(HTTParty.get("https://api.github.com/user?access_token=" + params[:access_token]).body)["id"]
+      @submissions = Submission.where(github_id: id, private: [nil,false])
+    end
     render json: @submissions
   end
   def show
