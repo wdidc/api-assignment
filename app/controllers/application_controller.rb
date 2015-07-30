@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   after_filter :set_access_control_headers
   skip_before_filter :verify_authenticity_token
-  before_action :authenticate_user!, only: [:destroy,:update,:create]
+  before_action :authenticate_user!
 
   def set_access_control_headers
       headers['Access-Control-Allow-Origin'] = "*"
@@ -25,13 +25,18 @@ class ApplicationController < ActionController::Base
 
   private
   def authenticate_user!
-    if is_an_instructor?
-      return true
+    return true if user_matches_student? || is_an_instructor? || has_api_token?
+
+    render json: {error:"Missing valid api or access token"}
+    return false
+  end
+
+  def user_matches_student?
+    if params[:access_token] && params[:github_id]
+      current_user_github_id = JSON.parse(HTTParty.get("https://api.github.com/user?access_token=" + params[:access_token]).body)["id"]
+      return params[:github_id] == current_user_github_id
     end
-    unless has_api_token?
-      render json: {error:"Missing valid api token"}
-      return
-    end
+    return false
   end
 
   def has_api_token?
