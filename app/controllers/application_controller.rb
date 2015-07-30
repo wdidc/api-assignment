@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
     if params[:access_token] && params[:github_id]
       current_user_github_id = JSON.parse(HTTParty.get("https://api.github.com/user?access_token=" + params[:access_token]).body)["id"]
       logger.warn("#gh user id: #{current_user_github_id}, requested student id: #{params[:github_id]}")
-      return params[:github_id] == current_user_github_id
+      return params[:github_id].to_i == current_user_github_id.to_i
     end
     return false
   end
