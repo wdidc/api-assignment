@@ -36,4 +36,7 @@ class Student
     @info["squad"]
   end
 
+  def submissions
+    Submission.where(github_id: self.github_user_id)
+  end
 end
