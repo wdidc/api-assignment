@@ -1,4 +1,6 @@
 class AssignmentsController < ApplicationController
+  skip_before_filter :authorize_user!, only: [:index]
+
   def index
     @assignment = Assignment.new
     @assignments = Assignment.order(due_date: :desc)

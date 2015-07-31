@@ -1,13 +1,12 @@
 class Submission < ActiveRecord::Base
   belongs_to :assignment
-  @@students = Student.all
 
   def students
-    @@students
+    Student.all
   end
 
   def student
-    return @@students.find{|s| s["github_user_id"] == self.github_id }
+    return students.find{|s| s["github_user_id"] == self.github_id }
   end
 
   def as_json(options={})
@@ -32,7 +31,7 @@ class Submission < ActiveRecord::Base
   end
 
   def involves_squad
-    studs = @@students.select{|s|
+    studs = students.select{|s|
       s["squad"] === student["squad"]
     }
     query = []
