@@ -46,11 +46,10 @@ class Assignment < ActiveRecord::Base
   end
 
   private
-  def seed_submissions
-    students = Student.all
-    students.each do |student|
-      if student["name"]
-        self.submissions.create( github_id: student["github_user_id"] )
+  def seed_submissions    
+    Student.all.each do |student|
+      if student.name
+        self.submissions.create( github_id: student.github_user_id )
       end
     end
   end

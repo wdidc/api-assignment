@@ -2,7 +2,9 @@ class Student
   @@students = HTTParty.get("http://api.wdidc.org/students")
 
   def self.all
-    @@students
+    @@students.map do |student_info|
+      Student.new(student_info)
+    end
   end
 
   def self.find(gh_user_id)
