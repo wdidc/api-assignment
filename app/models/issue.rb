@@ -3,7 +3,7 @@ class Issue
   attr_reader :user_id, :url, :comments, :state, :created_at, :updated_at, :closed_at
 
   def initialize(issue_info)
-    return nil if issue_info.nil? || issue_info["user"].nil?
+    return nil unless (issue_info && issue_info.is_a?(Hash) && issue_info.fetch("user", false) )
     @info = issue_info
 
     @user_id = issue_info["user"]["id"]
