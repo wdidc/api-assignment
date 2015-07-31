@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get '/logout', to: "application#logout"
   get '/outcomes', to: "assignments#outcomes"
 
+  resources :students, only: [:index, :show]
   get 'students/:github_id/submissions', to: "submissions#index"
 
   resources :assignments do

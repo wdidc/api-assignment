@@ -8,11 +8,14 @@ class Student
   end
 
   def self.find(gh_user_id)
-    student_info = @@students.find{|s| s["github_user_id"] == gh_user_id }
+    student_info = @@students.find{|s| s["github_user_id"] == gh_user_id.to_i }
     Student.new(student_info)
   end
 
   def initialize(student_info)
+    # is it likely that student_info is a hash of student info
+    github_user_id = student_info["github_user_id"]
+    fail ArgumentError, "student_info is required (#{student_info})." if github_user_id.nil?
     @info = student_info
   end
 

@@ -1,0 +1,9 @@
+<h1>Students</h1>
+
+<ul>
+  <% @students.each do |student| %>
+    <li>
+      <%= link_to student.name, student_path(student.github_user_id) %>
+    </li>
+  <% end %>
+</ul>

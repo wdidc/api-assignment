@@ -1,0 +1,35 @@
+<% issue = submission.issue(session[:token]) %>
+<% assignment = submission.assignment %>
+
+<tr>
+  <th>
+    <%= submission.student.name %><br />
+    (<a href="<%= "#{assignment.repo_url}/issues?q=#{submission.involves_squad}" %>" target="_blank"><%= submission.student.squad %></a>)<br />
+    <%= link_to "Edit", edit_assignment_submission_path(assignment, submission) %>
+  </th>
+  <td>
+    <% if issue %>
+      <ul class="dates">
+        <% if assignment.due_date != "" %>
+          <li>Due: <%= Date.parse(assignment.due_date).strftime("%a %m/%d") %></li>
+        <% end %>
+        <% ["created", "updated", "closed"].each do |which| %>
+          <li><%= "#{which.capitalize}: #{issue[which] ? issue[which].strftime("%a %m/%d %I:%M %P") : "<span class='x'></span>"}".html_safe %></li>
+        <% end %>
+        <li><a class="ish" target="_blank" href="<%= issue[:url] %>">View Issue</a></li>
+        <li><a class="ish" target="_blank" href="<%= assignment.repo_url.sub("ga-dc", submission.student.github_username) %>">View Fork, if exists</a></li>
+      </ul>
+      <%= markdown(issue[:comments]) %>
+    <% elsif assignment.assignment_type == "homework" %>
+      <span class="x"></span>
+    <% end %>
+  </td>
+  <td class="status">
+    <% if assignment.assignment_type == "homework" %>
+      <%= check_box_tag submission.id, true, submission.status === "complete", :"data-submit" => assignment_submissions_path(assignment) + "/#{submission.id}" %>
+      <label for="<%= submission.id %>">Complete</label>
+    <% else %>
+      <%= submission.status %>
+    <% end %>
+  </td>
+</tr>
