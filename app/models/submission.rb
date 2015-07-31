@@ -6,9 +6,9 @@ class Submission < ActiveRecord::Base
   end
 
   def issue(token)
-    url ||= "https://api.github.com/repos/" + self.assignment.repo_url.gsub(/https:\/\/github\.com\//,"") + "/issues?state=all&access_token=" + token
+    url ||= "https://api.github.com/repos/" + self.assignment.repo_url.gsub(/https:\/\/github\.com\//,"") + "/issues?state=all&creator=#{self.student.github_username}&access_token=" + token
     res = HTTParty.get(url)
-    return res.body.first
+    return Issue.new(res.first)
   end
 
   def student
