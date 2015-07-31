@@ -1,8 +1,13 @@
 class Assignment < ActiveRecord::Base
   has_many :submissions, dependent: :destroy
   after_create :seed_submissions
+
+  def issue_for(submission, token)
+    issues(token).find{ |issue| issue.user_id == submission.student.github_user_id }
+  end
+
   def issues(token, url=nil, isshs=[])
-    begin
+    @issues ||= begin
       if self.repo_url
         url ||= "https://api.github.com/repos/" + self.repo_url.gsub(/https:\/\/github\.com\//,"") + "/issues?state=all&access_token="+token
         res = HTTParty.get(url)
@@ -23,7 +28,6 @@ class Assignment < ActiveRecord::Base
     rescue
       @issues = {}
     end
-    @issues
   end
 
   def completion_count
