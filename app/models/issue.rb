@@ -3,7 +3,7 @@ class Issue
   attr_reader :user_id, :url, :comments, :state, :created_at, :updated_at, :closed_at, :assignment, :submission
 
   def initialize(issue_info)
-    return nil unless (issue_info && issue_info.is_a?(Hash) && issue_info.fetch("user", false) )
+    raise ArgumentError, "must pass in a valid hash to make a new issue" unless (issue_info && issue_info.is_a?(Hash) && issue_info.fetch("user", false) )
     @info = issue_info
     @user_id = issue_info["user"]["id"]
     @url = issue_info["html_url"]
