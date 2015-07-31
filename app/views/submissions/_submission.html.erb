@@ -1,0 +1,34 @@
+<% issues = submission.issues(session[:token]) %>
+<% assignment = submission.assignment %>
+
+<tr>
+  <th>
+    <% if header == :student_name %>
+      <%= link_to submission.student.name, student_path(submission.student.github_user_id) %><br />
+    <% elsif header == :assignment_name %>
+      <%= link_to submission.assignment.title, submission.assignment %><br />
+    <% end %>
+
+    (<a href="<%= "#{assignment.repo_url}/issues?q=#{submission.involves_squad}" %>" target="_blank"><%= submission.student.squad %></a>)<br />
+    <%= link_to "Edit", edit_assignment_submission_path(assignment, submission) %>
+  </th>
+
+  <td>
+    <% if issues.empty? && assignment.assignment_type == "homework" %>
+      <span class="x"></span>
+    <% else %>
+      <% issues.each do |issue| %>
+        <%= render partial: "issues/issue", object: issue  %>
+      <% end %>
+    <% end %>
+  </td>
+
+  <td class="status">
+    <% if assignment.assignment_type == "homework" %>
+      <%= check_box_tag submission.id, true, submission.status === "complete", :"data-submit" => assignment_submissions_path(assignment) + "/#{submission.id}" %>
+      <label for="<%= submission.id %>">Complete</label>
+    <% else %>
+      <%= submission.status %>
+    <% end %>
+  </td>
+</tr>

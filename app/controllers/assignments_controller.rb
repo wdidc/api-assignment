@@ -1,4 +1,6 @@
 class AssignmentsController < ApplicationController
+  skip_before_filter :authorize_user!, only: [:index]
+
   def index
     @assignment = Assignment.new
     @assignments = Assignment.order(due_date: :desc)
@@ -11,9 +13,8 @@ class AssignmentsController < ApplicationController
   def show
       @assignment = Assignment.find_by(weekday: params[:id]) || Assignment.find(params[:id])
       @submissions = @assignment.submissions.sort_by do |s|
-        [s.student["squad"], s.student["name"][s.student["name"].index(" ")..-1]]
+        [s.student.squad, s.student.last_name]
       end
-      @issues = @assignment.issues session[:token]
       @students = Student.all
       respond_to do |format|
         format.html

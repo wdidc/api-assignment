@@ -35,9 +35,6 @@ ActiveRecord::Schema.define(version: 20150716140646) do
     t.string   "status"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
-    t.string   "comments"
-    t.string   "title"
-    t.datetime "submitted"
     t.boolean  "private"
   end
 

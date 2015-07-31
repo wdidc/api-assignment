@@ -2,7 +2,7 @@
 <h3>Submissions</h3>
 <% @submissions.each do |submission| %>
   <div>
-    <h4><%= submission.student["name"] %></h4>
+    <h4><%= submission.student.name %></h4>
     Status: <%= submission.status %>
   </div>
 <% end %>
