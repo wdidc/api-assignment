@@ -6,7 +6,7 @@ class Submission < ActiveRecord::Base
   end
 
   def student
-    return students.find{|s| s["github_user_id"] == self.github_id }
+    return Student.find(self.github_id)
   end
 
   def as_json(options={})
@@ -14,7 +14,7 @@ class Submission < ActiveRecord::Base
       assignment_title: assignment_title,
       assignment_type: assignment_type,
       assignment_repo_url: assignment_repo_url,
-      student_name: student["name"]
+      student_name: student.name
     })
   end
 
@@ -32,7 +32,7 @@ class Submission < ActiveRecord::Base
 
   def involves_squad
     studs = students.select{|s|
-      s["squad"] === student["squad"]
+      s["squad"] === student.squad
     }
     query = []
     studs.each{|s|
