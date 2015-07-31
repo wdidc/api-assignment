@@ -5,8 +5,8 @@ class Submission < ActiveRecord::Base
     Student.all
   end
 
-  def issue(token)
-    self.assignment.issue_for(self, token)
+  def issues(token)
+    self.assignment.issues_for(self, token)
   end
 
   def student

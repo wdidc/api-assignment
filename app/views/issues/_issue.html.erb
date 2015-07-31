@@ -1,0 +1,11 @@
+<ul class="dates">
+  <% if issue.assignment.due_date != "" %>
+    <li>Due: <%= Date.parse(issue.assignment.due_date).strftime("%a %m/%d") %></li>
+  <% end %>
+  <% ["created_at", "updated_at", "closed_at"].each do |which| %>
+    <li><%= "#{which.capitalize}: #{issue.send(which) ? issue.send(which).strftime("%a %m/%d %I:%M %P") : "<span class='x'></span>"}".html_safe %></li>
+  <% end %>
+  <li><a class="ish" target="_blank" href="<%= issue.url %>">View Issue</a></li>
+  <li><a class="ish" target="_blank" href="<%= issue.assignment.repo_url.sub("ga-dc", issue.submission.student.github_username) %>">View Fork, if exists</a></li>
+</ul>
+<%= markdown(issue.comments) %>

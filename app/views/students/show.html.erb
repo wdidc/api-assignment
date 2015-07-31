@@ -3,5 +3,5 @@
 
 <h2>Submissions</h2>
 <table>
-  <%= render @student.submissions %>
+  <%= render partial: @student.submissions, locals: {header: :assignment_name} %>
 </table>

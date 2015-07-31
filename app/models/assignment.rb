@@ -2,8 +2,8 @@ class Assignment < ActiveRecord::Base
   has_many :submissions, dependent: :destroy
   after_create :seed_submissions
 
-  def issue_for(submission, token)
-    issues(token).find{ |issue| issue.user_id == submission.student.github_user_id }
+  def issues_for(submission, token)
+    issues(token).select{ |issue| issue.user_id == submission.github_id }
   end
 
   def issues(token, url=nil, isshs=[])
@@ -13,7 +13,6 @@ class Assignment < ActiveRecord::Base
         res = HTTParty.get(url)
         isshs << JSON.parse(res.body)
         isshs.flatten!(1)
-
         if res.headers["link"]
           next_url = res.headers["link"].match(/<(.*)>; rel="next"/)
           if next_url[1]
@@ -25,9 +24,11 @@ class Assignment < ActiveRecord::Base
       else
         @issues = {}
       end
-    rescue
+    rescue Exception => e
+      logger.warn(e)
       @issues = {}
     end
+    @issues
   end
 
   def completion_count

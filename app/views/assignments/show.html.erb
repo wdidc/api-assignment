@@ -9,5 +9,5 @@
 <% end %>
 
 <table>
-  <%= render @submissions %>
+  <%= render partial: @submissions, locals: {header: :student_name} %>
 </table>

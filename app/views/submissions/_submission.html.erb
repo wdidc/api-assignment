@@ -1,29 +1,28 @@
-<% issue = submission.issue(session[:token]) %>
+<% issues = submission.issues(session[:token]) %>
 <% assignment = submission.assignment %>
 
 <tr>
   <th>
-    <%= submission.student.name %><br />
+    <% if header == :student_name %>
+      <%= link_to submission.student.name, student_path(submission.student.github_user_id) %><br />
+    <% elsif header == :assignment_name %>
+      <%= link_to submission.assignment.title, submission.assignment %><br />
+    <% end %>
+
     (<a href="<%= "#{assignment.repo_url}/issues?q=#{submission.involves_squad}" %>" target="_blank"><%= submission.student.squad %></a>)<br />
     <%= link_to "Edit", edit_assignment_submission_path(assignment, submission) %>
   </th>
+
   <td>
-    <% if issue %>
-      <ul class="dates">
-        <% if assignment.due_date != "" %>
-          <li>Due: <%= Date.parse(assignment.due_date).strftime("%a %m/%d") %></li>
-        <% end %>
-        <% ["created_at", "updated_at", "closed_at"].each do |which| %>
-          <li><%= "#{which.capitalize}: #{issue.send(which) ? issue.send(which).strftime("%a %m/%d %I:%M %P") : "<span class='x'></span>"}".html_safe %></li>
-        <% end %>
-        <li><a class="ish" target="_blank" href="<%= issue.url %>">View Issue</a></li>
-        <li><a class="ish" target="_blank" href="<%= assignment.repo_url.sub("ga-dc", submission.student.github_username) %>">View Fork, if exists</a></li>
-      </ul>
-      <%= markdown(issue.comments) %>
-    <% elsif assignment.assignment_type == "homework" %>
+    <% if issues.empty? && assignment.assignment_type == "homework" %>
       <span class="x"></span>
+    <% else %>
+      <% issues.each do |issue| %>
+        <%= render partial: "issues/issue", object: issue  %>
+      <% end %>
     <% end %>
   </td>
+
   <td class="status">
     <% if assignment.assignment_type == "homework" %>
       <%= check_box_tag submission.id, true, submission.status === "complete", :"data-submit" => assignment_submissions_path(assignment) + "/#{submission.id}" %>
