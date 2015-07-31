@@ -31,12 +31,12 @@ class Submission < ActiveRecord::Base
   end
 
   def involves_squad
-    studs = students.select{|s|
-      s["squad"] === student.squad
+    studs = students.select{|each_student|
+      each_student.squad === self.student.squad
     }
     query = []
-    studs.each{|s|
-      query.push("involves%3A#{s["github_username"]}")
+    studs.each{|student|
+      query.push("involves%3A#{student.github_username}")
     }
     return query.join("+")
   end
