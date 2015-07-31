@@ -1,0 +1,16 @@
+<%= form_for @assignment do |f| %>
+  <tr>
+    <td><%= f.text_field :title %></td>
+    <td><%= f.select :assignment_type, [["homework","homework"],["outcomes","outcomes"],["project","project"]] %></td>
+    <td><%= f.text_field :repo_url %></td>
+    <td><%= f.date_field :due_date %></td>
+    <td><%= f.submit %></td>
+  </tr>
+
+  <tr>
+    <th><%= f.label :title %></th>
+    <th><%= f.label :assignment_type %></th>
+    <th><%= f.label :repo_url %></th>
+    <th><%= f.label :due_date %></th>
+  </tr>
+<% end %>

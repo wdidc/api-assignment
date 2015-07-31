@@ -1,23 +1,28 @@
 <% if session[:token] %>
+
   <h1>Assignments</h1>
   <table>
-  <%= render 'form' %>
-  <% @assignments.each do |assignment| %>
-    <tr>
-      <th>
-        <%= link_to "#{assignment.title}", assignment_path(assignment) %>
-        <aside><%= "%#{assignment.completion_rate}" %></aside>
-      </th>
-      <td><%= assignment.assignment_type %></td>
-      <td><%= link_to repo_name(assignment.repo_url), assignment.repo_url %></td>
-      <td><%= assignment.due_date %></td>
-      <td>
-      <% if session[:token] %>
-      	<%= link_to "edit", edit_assignment_path(assignment)%>
-      	<%= link_to 'delete', assignment_path(assignment), method: :delete %>
+    <thead>
+      <%= render 'table_header' %>
+    </thead>
+    <tbody>
+      <% @assignments.each do |assignment| %>
+        <tr>
+          <td>
+            <%= link_to "#{assignment.title}", assignment_path(assignment) %>
+            <aside><%= "%#{assignment.completion_rate}" %></aside>
+          </td>
+          <td><%= assignment.assignment_type %></td>
+          <td><%= link_to repo_name(assignment.repo_url), assignment.repo_url %></td>
+          <td><%= assignment.due_date %></td>
+          <td>
+          <% if session[:token] %>
+          	<%= link_to "edit", edit_assignment_path(assignment)%>
+          	<%= link_to 'delete', assignment_path(assignment), method: :delete %>
+          <% end %>
+          </td>
+        </tr>
       <% end %>
-      </td>
-    </tr>
-  <% end %>
+    </tbody>
   </table>
 <% end %>
