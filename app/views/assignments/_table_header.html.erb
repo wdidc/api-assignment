@@ -1,17 +1,14 @@
 <%= form_for @assignment do |f| %>
-  <tr>
-    <td><%= f.text_field :title %></td>
-    <td><%= f.select :assignment_type, [["homework","homework"],["outcomes","outcomes"],["project","project"]] %></td>
-    <td><%= f.text_field :repo_url %></td>
-    <td><%= f.date_field :due_date %></td>
-    <td><%= f.submit %></td>
-  </tr>
-
-  <tr>
-    <th><%= f.label :title %></th>
-    <th><%= f.label :percent_complete %></th>
-    <th><%= f.label :assignment_type %></th>
-    <th><%= f.label :repo_url %></th>
-    <th><%= f.label :due_date %></th>
-  </tr>
+    <%= f.text_field :title, placeholder: "Title" %>
+    <%= f.select :assignment_type, [["homework","homework"],["outcomes","outcomes"],["project","project"]] %>
+    <%= f.text_field :repo_url, placeholder: "Repo Url"%>
+    <%= f.date_field :due_date %>
+    <%= f.submit %>
 <% end %>
+  <tr>
+    <th>Title</th>
+    <th>Percent Complete</th>
+    <th>Type</th>
+    <th>Repo Url</th>
+    <th>Due Date</th>
+  </tr>
