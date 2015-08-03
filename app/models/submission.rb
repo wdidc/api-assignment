@@ -18,6 +18,7 @@ class Submission < ActiveRecord::Base
       assignment_title: assignment_title,
       assignment_type: assignment_type,
       assignment_repo_url: assignment_repo_url,
+      assignment_due_date: assignment_due_date,
       student_name: student.name
     })
   end
@@ -28,6 +29,10 @@ class Submission < ActiveRecord::Base
 
   def assignment_repo_url
     self.assignment && self.assignment.repo_url
+  end
+
+  def assignment_due_date
+    self.assignment && self.assignment.due_date
   end
 
   def assignment_type
