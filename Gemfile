@@ -14,6 +14,7 @@ gem 'httparty'
 gem 'jbuilder', '~> 2.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+gem 'metamagic' # manage html meta info
 gem 'omniauth'
 gem 'omniauth-github'
 gem 'pry'

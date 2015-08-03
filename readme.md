@@ -27,11 +27,11 @@ creates a new assignment. required parameters are:
 
 | Name | Type | Description |
 |---|---|---|
-| `title` | `string` | **Required.** The title of the assignment | 
-| `weekday` | `string` | **Required.** The weekday of the assignment of format w00d00 | 
+| `title` | `string` | **Required.** The title of the assignment |
+| `weekday` | `string` | **Required.** The weekday of the assignment of format w00d00 |
 | `repo_url` | `string` | **Required.** The git cloneable repository url of the assignment |
-| `due_date` | `string` | The due date of the assignment of format w00d00 | 
-| `rubric_url` | `string` | A link to the rubric of the assignment | 
+| `due_date` | `string` | The due date of the assignment of format w00d00 |
+| `rubric_url` | `string` | A link to the rubric of the assignment |
 
 ## Get a single assignment
 
@@ -42,7 +42,7 @@ GET /assignments/:id
 lists an assignment by both id and weekday value. As an example:
 
 ```
-http://api.wdidc.org/assignments/1 
+http://api.wdidc.org/assignments/1
 ```
 
 or
@@ -89,4 +89,5 @@ github_client_secret: "your client id"
 ```
 
 
-## Trivial Update
+## Managing Page Meta Info (title, description, keywords, etc)
+Assigning an appropriate title can come in handy for managing browser tabs (i.e. when you open all the assignments for your Squad).  We now have a documented process for managing page meta info, via [metamagic](https://github.com/lassebunk/metamagic).
