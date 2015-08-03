@@ -27,6 +27,9 @@ header {
   border-bottom: grey solid 2px;
 }
 
+nav {
+  position: relative;
+}
 nav .home {
   float: left;
 }
