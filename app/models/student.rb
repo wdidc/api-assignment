@@ -9,7 +9,7 @@ class Student
 
   def self.find(gh_user_id)
     student_info = @@students.find{|s| s["github_user_id"] == gh_user_id.to_i }
-    Student.new(student_info)
+    Student.new(student_info) if student_info
   end
 
   def initialize(student_info)
