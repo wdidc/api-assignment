@@ -1,3 +1,5 @@
 <%= link_to "edit", edit_assignment_submission_path(@assignment,@submission) %>
 <h2><%= @submission.student.name %></h2>
-<%= markdown(@submission.status) %>
+<table>
+  <%= render partial: @submission, locals: {header: :assignment_name} %>
+</table>
