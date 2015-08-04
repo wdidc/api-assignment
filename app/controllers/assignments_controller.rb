@@ -19,7 +19,7 @@ class AssignmentsController < ApplicationController
     else
       @submissions = @assignment.submissions
     end
-    @submissions.sort_by! do |s|
+    @submissions = @submissions.sort_by do |s|
       [s.student.squad, s.student.last_name]
     end
     @students = Student.all
