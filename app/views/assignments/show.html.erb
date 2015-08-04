@@ -9,7 +9,13 @@
   <%= link_to 'delete', assignment_path(@assignment), method: :delete, data: {confirm: "Are you sure?"} %>
 <% end %>
 
+<div class='sort-by'>
+<% @squads.each do |squad| %>
+  <%= link_to squad, assignment_path(@assignment) + "?squad=#{squad.downcase}" %>
+<% end %>
+</div>
 <h2>Submissions</h2>
+
 <table>
   <%= render partial: @submissions, locals: {header: :student_name} %>
 </table>

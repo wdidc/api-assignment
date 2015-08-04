@@ -192,3 +192,17 @@ aside {
   font-size:12px;
   font-weight:normal;
 }
+
+.sort-by a{
+  display:inline-block;
+  margin-top:1em;
+  border:1px solid #ccc;
+  padding:.5em;
+  text-decoration:none;
+  border-radius:3px;
+  transition:background .2s ease;
+}
+
+.sort-by a:hover{
+  background:#F3F3F3;
+}

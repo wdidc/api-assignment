@@ -11,15 +11,23 @@ class AssignmentsController < ApplicationController
   end
 
   def show
-      @assignment = Assignment.find_by(weekday: params[:id]) || Assignment.find(params[:id])
-      @submissions = @assignment.submissions.sort_by do |s|
-        [s.student.squad, s.student.last_name]
+    @assignment = Assignment.find(params[:id])
+    if params[:squad]
+      @submissions = @assignment.submissions.select do |s|
+	s.student.squad.downcase == params[:squad].downcase
       end
-      @students = Student.all
-      respond_to do |format|
-        format.html
-        format.json { render json: @assignment}
-      end
+    else
+      @submissions = @assignment.submissions
+    end
+    @submissions.sort_by! do |s|
+      [s.student.squad, s.student.last_name]
+    end
+    @students = Student.all
+    @squads = ["Ada","Bash","C","Dart","Elixir","Fortran"]
+    respond_to do |format|
+      format.html
+      format.json { render json: @assignment}
+    end
   end
 
   def create
