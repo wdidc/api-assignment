@@ -39,6 +39,17 @@ class Assignment < ActiveRecord::Base
     (100 * (self.completion_count.to_f / self.submissions.size)).round(0)
   end
 
+  def summary_info
+    summary_items = [assignment_type]
+    summary_items << weekday if weekday?
+    summary_items << "due: #{due_date}" if due_date?
+    summary_items
+  end
+
+    def to_s
+    "#{title} (#{assignment_type})"
+  end
+
   private
   def seed_submissions
     Student.all.each do |student|

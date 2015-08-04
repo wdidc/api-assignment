@@ -50,4 +50,10 @@ class Submission < ActiveRecord::Base
     return query.join("+")
   end
 
+  def to_s
+    items_to_display = []
+    items_to_display << "#{student.name}'s" if student
+    items_to_display <<  %Q("#{self.assignment}")
+    items_to_display.join(" ")
+  end
 end

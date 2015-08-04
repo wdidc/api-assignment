@@ -1,3 +1,5 @@
+<h1><%= title "Outcomes related Assignments" %></h1>
+
 <% @assignments.each do |assignment| %>
 <div class='assignment'>
   <h3><%= link_to assignment.title, assignment_path(assignment) %></h3><small>(<%= assignment.assignment_type %>)</small>

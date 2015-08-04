@@ -13,12 +13,6 @@
           <td><%= assignment.assignment_type %></td>
           <td><%= link_to repo_name(assignment.repo_url), assignment.repo_url %></td>
           <td><%= assignment.due_date %></td>
-          <td>
-          <% if session[:token] %>
-          	<%= link_to "edit", edit_assignment_path(assignment)%>
-          	<%= link_to 'delete', assignment_path(assignment), method: :delete %>
-          <% end %>
-          </td>
         </tr>
       <% end %>
     </tbody>
