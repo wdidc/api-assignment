@@ -16,9 +16,6 @@
         <li class="home">
           <a href="/"><i class="icon icon-home"></i></a>
         </li>
-        <li>
-          <%= link_to "Students", students_path %>
-        </li>
         <li class='login'>
           <% if session[:token] %>
             <%= link_to "Log out", '/logout' %>
@@ -26,6 +23,9 @@
             <%= link_to "Log in with GitHub", '/auth/github' %>
           <% end %>
         </li>
+	<li class='login'>
+          <%= link_to "Students", students_path %>
+	</li>
       </ul>
     </nav>
 
