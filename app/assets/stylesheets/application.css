@@ -193,6 +193,11 @@ aside {
   font-weight:normal;
 }
 
+li.login {
+  position: relative;
+  z-index: 1; // in front of github banner
+}
+
 .sort-by a{
   display:inline-block;
   margin-top:1em;
