@@ -46,6 +46,10 @@ class Assignment < ActiveRecord::Base
     summary_items
   end
 
+    def to_s
+    "#{title} (#{assignment_type})"
+  end
+
   private
   def seed_submissions
     Student.all.each do |student|
