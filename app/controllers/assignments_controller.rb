@@ -1,6 +1,6 @@
 class AssignmentsController < ApplicationController
   skip_before_filter :authorize_user!, only: [:index]
-  before_filter :authorize_instructor!
+  before_filter :authorize_instructor!, except: [:index]
 
   def index
     @assignment = Assignment.new
