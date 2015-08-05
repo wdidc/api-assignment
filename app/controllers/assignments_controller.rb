@@ -1,5 +1,6 @@
 class AssignmentsController < ApplicationController
   skip_before_filter :authorize_user!, only: [:index]
+  before_filter :authorize_instructor!
 
   def index
     @assignment = Assignment.new
@@ -14,7 +15,7 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.find(params[:id])
     if params[:squad]
       @submissions = @assignment.submissions.select do |s|
-	s.student.squad.downcase == params[:squad].downcase
+        s.student.squad.downcase == params[:squad].downcase
       end
     else
       @submissions = @assignment.submissions

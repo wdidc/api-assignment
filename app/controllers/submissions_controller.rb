@@ -1,4 +1,6 @@
 class SubmissionsController < ApplicationController
+  before_filter :authorize_instructor!, except: [:index]
+
   def index
     if params[:github_id]
       @submissions = Submission.where(github_id: params[:github_id], private: [nil,false])
