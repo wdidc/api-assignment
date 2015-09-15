@@ -26,4 +26,9 @@ module ApplicationHelper
       markdown.render(text).html_safe
     end
   end
+
+  def student_url(student_json)
+    github_id = student_json.fetch('github_user_id')
+    URI::HTTP.build(host: 'students.wdidc.org', path: "/#{github_id}").to_s
+  end
 end
