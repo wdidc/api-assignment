@@ -31,6 +31,13 @@ class ApplicationController < ActionController::Base
     return false
   end
 
+  def authorize_instructor!
+    return true if is_an_instructor? || has_api_token?
+
+    render json: {error:"Not authorized to modify data."}
+    return false
+  end
+
   def user_matches_student?
     if params[:access_token] && params[:github_id]
       current_user_github_id = JSON.parse(HTTParty.get("https://api.github.com/user?access_token=" + params[:access_token]).body)["id"]
