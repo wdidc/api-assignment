@@ -1,0 +1,12 @@
+@media all and (max-width:30em){
+  table.tablesorter {
+    thead, td{
+      display:none;
+    }
+    td:first-child{
+      display:block;
+      font-size:1.5em;
+      font-weight:bold;
+    }
+  }
+}

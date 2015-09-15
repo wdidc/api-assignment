@@ -37,19 +37,22 @@ $(function(){
     return time
   })
   $(".status input").change(function(){
+    var input = $(this);
+    input.prop("disabled", true);
     $.ajax({
-      url: $(this).attr("data-submit"),
+      url: input.attr("data-submit"),
       type: "post",
       dataType: "json",
       data: {
-	_method: "put",
-	submission: {
-	  id: this.id,
-	  status: this.checked ? "complete" : "incomplete"
-	}
+        _method: "put",
+        submission: {
+          id: input.prop("id"),
+          status: input.prop("checked") ? "complete" : "incomplete"
+        }
       }
-    }).always(function(response){
+    }).done(function(response){
       console.dir(response);
+      input.prop("disabled", false);
     });
   });
 
@@ -66,7 +69,7 @@ $(function(){
     isTyping(event, function( response ){
       var time = moment(response.updated_at).format('MMMM Do YYYY, h:mm:ssa')
       var $updatedAt = $(self).find(".js-updated-at").html( time )
-    }) 
+    })
   })
   var typingTimer
   function isTyping( event, callback ){
@@ -80,7 +83,7 @@ $(function(){
     data = $form.serializeObject()
     if( typeof data["submission[private]"] == "object" ){
       data["submission[private]"] = data["submission[private]"][1]
-    } 
+    }
     data._method = "patch"
     $.ajax({
       url: $form.attr("action"),

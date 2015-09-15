@@ -1,10 +1,11 @@
 class StudentsController < ApplicationController
+  before_filter :authorize_instructor!
+  
   def index
-    @submissions = Submission.where(github_id: params[:student_id], private: [nil,false])
-    render json: @submissions
+    @students =Student.all
   end
+
   def show
-    @submission = Submission.where(assignment_id: params[:assignment_id], github_id: params[:student_id]).first
-    render json: @submission
+    @student = Student.find(params[:id])
   end
 end

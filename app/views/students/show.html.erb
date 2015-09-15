@@ -1,0 +1,6 @@
+<h1><%= title @student.name %></h1>
+
+<h2>Submissions</h2>
+<table>
+  <%= render partial: @student.submissions, locals: {header: :assignment_name} %>
+</table>

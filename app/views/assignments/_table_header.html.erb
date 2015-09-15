@@ -1,0 +1,14 @@
+<%= form_for @assignment do |f| %>
+    <%= f.text_field :title, placeholder: "Title" %>
+    <%= f.select :assignment_type, [["homework","homework"],["outcomes","outcomes"],["project","project"]] %>
+    <%= f.text_field :repo_url, placeholder: "Repo Url"%>
+    <%= f.date_field :due_date %>
+    <%= f.submit %>
+<% end %>
+  <tr>
+    <th>Title</th>
+    <th>Percent Complete</th>
+    <th>Type</th>
+    <th>Repo Url</th>
+    <th>Due Date</th>
+  </tr>

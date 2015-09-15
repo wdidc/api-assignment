@@ -1,4 +1,7 @@
 class AssignmentsController < ApplicationController
+  skip_before_filter :authorize_user!, only: [:index]
+  before_filter :authorize_instructor!, except: [:index]
+
   def index
     @assignment = Assignment.new
     @assignments = Assignment.order(created_at: :desc)
@@ -9,14 +12,23 @@ class AssignmentsController < ApplicationController
   end
 
   def show
-      @assignment = Assignment.find_by(weekday: params[:id]) || Assignment.find(params[:id])
-      @submissions = @assignment.submissions.sort_by{ |s| s.student["squad"] }
-      @issues = @assignment.issues session[:token]
-      @students = Student.all
-      respond_to do |format|
-        format.html
-        format.json { render json: @assignment}
+    @assignment = Assignment.find(params[:id])
+    if params[:squad]
+      @submissions = @assignment.submissions.select do |s|
+        s.student.squad.downcase == params[:squad].downcase
       end
+    else
+      @submissions = @assignment.submissions
+    end
+    @submissions = @submissions.sort_by do |s|
+      [s.student.squad, s.student.last_name]
+    end
+    @students = Student.all
+    @squads = ["Ada","Bash","C","Dart","Elixir","Fortran"]
+    respond_to do |format|
+      format.html
+      format.json { render json: @assignment}
+    end
   end
 
   def create

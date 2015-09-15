@@ -1,8 +1,15 @@
 class SubmissionsController < ApplicationController
+  before_filter :authorize_instructor!, except: [:index]
+
   def index
-    @assignment = Assignment.find_by(weekday: params[:assignment_id]) || Assignment.find(params[:assignment_id])
-    @students = Student.all
-    @submissions = @assignment.submissions
+    if params[:github_id]
+      @submissions = Submission.where(github_id: params[:github_id], private: [nil,false])
+    else
+      @students = Student.all
+      @assignment = Assignment.find(params[:assignment_id])
+      @submissions = @assignment.submissions
+    end
+
     respond_to do |format|
       format.html
       format.json { render status: 200, json: @submissions.to_json }

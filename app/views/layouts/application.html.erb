@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Assignments</title>
+  <%= metamagic title: 'Assignments' %>
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application'%>
+  <%= javascript_include_tag "https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.22.3/js/jquery.tablesorter.js" %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width">
 </head>
 <body>
   <header class='cf'>
@@ -13,6 +16,10 @@
         <li class="home">
           <a href="/"><i class="icon icon-home"></i></a>
         </li>
+        <li>
+          <%= link_to "Students", students_path %>
+        </li>
+
         <li class='login'>
           <% if session[:token] %>
             <%= link_to "Log out", '/logout' %>
@@ -20,7 +27,9 @@
             <%= link_to "Log in with GitHub", '/auth/github' %>
           <% end %>
         </li>
-    </nev>
+      </ul>
+      <%= render 'layouts/github_ribbon' %>
+    </nav>
 
   </header>
   <%= yield %>

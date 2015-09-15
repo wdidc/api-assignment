@@ -1,7 +1,13 @@
 /*
  *= require_tree .
+ *= require tablesorter_blue/style
  *= require_self
  */
+
+ *
+ {
+   box-sizing:border-box;
+ }
 
 .cf:after{
   content:' ';
@@ -21,6 +27,9 @@ header {
   border-bottom: grey solid 2px;
 }
 
+nav {
+  position: relative;
+}
 nav .home {
   float: left;
 }
@@ -31,11 +40,13 @@ nav .login {
 
 nav ul {
   margin: 0;
+  padding: 0;
+  vertical-align:middle;
 }
 
 /* horizontal nav bar */
 nav li {
-  display: inline;
+  display: inline-block;
   padding: 10px;
 }
 
@@ -46,9 +57,10 @@ a{
 
 body{
   font-family:'Helvetica Neue', sans-serif;
-  max-width:800px;
+  max-width:1000px;
   margin:auto;
-  padding:0 1em;
+  padding:1em;
+  padding-top:0;
 }
 
 h1 a, h2 a{
@@ -94,10 +106,12 @@ li
 }
 input+label
 {
+  display:block;
   background-color:#ffaaaa;
   padding:5px 10px;
   border-radius:5px;
   border:1px solid transparent;
+  width:100%;
 }
 input:checked+label
 {
@@ -115,6 +129,14 @@ input:checked+label:after
 {
   content:"!";
 }
+input:disabled+label{
+  background-color:#eee;
+  color:#ccc;
+  cursor:default;
+}
+input:disabled+label:hover{
+  border-color:transparent;
+}
 
 table
 {
@@ -125,23 +147,69 @@ td,th
 {
   padding:10px 20px;
   text-align:left;
+  max-width:800px;
+  overflow-x:hidden;
+  vertical-align:top;
+  line-height:1.6em;
+  text-overflow:ellipsis;
+}
+td a
+{
+  word-break:break-word;
 }
 tr:nth-of-type(even)>*
 {
   background-color:#f3f3f3;
 }
-td.closed {
-  background-color: #cceecc;
-}
-td.open {
-  background-color: #ffdca9;
-}
-td.missing {
-  background-color: #ff9d94;
+td img {
+  max-width:400px;
 }
 
 textarea{
   font:inherit;
   width:100%;
   min-height:400px;
+}
+.dates {
+  font-family:monospace;
+  list-style-type:none;
+  padding:0;
+  line-height:12px;
+}
+.x:before {
+  content:"\02717";
+  color:red;
+}
+.ish {
+  display:block;
+  text-decoration:none;
+}
+.ish:hover {
+  color:#369;
+  text-decoration:underline;
+}
+
+aside {
+  float:right;
+  font-size:12px;
+  font-weight:normal;
+}
+
+li.login {
+  position: relative;
+  z-index: 1; // in front of github banner
+}
+
+.sort-by a{
+  display:inline-block;
+  margin-top:1em;
+  border:1px solid #ccc;
+  padding:.5em;
+  text-decoration:none;
+  border-radius:3px;
+  transition:background .2s ease;
+}
+
+.sort-by a:hover{
+  background:#F3F3F3;
 }

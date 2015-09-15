@@ -1,11 +1,9 @@
-<%= link_to "Preview", assignment_submission_path(@assignment, @submission) %>
-
 <div autosave>
   <br>
   <small>Updated <span class='js-updated-at js-time-ago'><%= @submission.updated_at %></span></small>
   <%= form_for([@assignment, @submission]) do |f|%>
     <h2>
-      <%= @submission.student["name"] %>
+      <%= @submission.student.name %>
     </h2>
     <p>
       <%= f.check_box :private, style: "display:none;"%>
