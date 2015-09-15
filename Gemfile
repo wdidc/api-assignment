@@ -10,14 +10,18 @@ gem 'pg'
 gem 'coffee-rails', '~> 4.1.0'
 gem 'figaro'
 gem 'httparty'
+
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
 gem 'metamagic' # manage html meta info
 gem 'omniauth'
 gem 'omniauth-github'
-gem 'pry'
+gem 'httparty'
+
 gem 'rack-cors', :require => 'rack/cors'
 gem 'redcarpet'
 # Use SCSS for stylesheets
@@ -35,10 +39,8 @@ gem 'unicorn'
 # gem 'bcrypt', '~> 3.1.7'
 
 group :development, :test do
-  # Call 'byebug' or 'binding.pry' anywhere in the code to stop execution and get a debugger console
-  gem 'pry-byebug'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  # gem 'spring' # not useful for these small apps
+  gem 'pry'
+  gem 'pry-byebug' # adds debugger like functionality to pry (next, step, continue, breakpoints, etc)
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
 end

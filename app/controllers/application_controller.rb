@@ -31,6 +31,13 @@ class ApplicationController < ActionController::Base
     return false
   end
 
+  def authorize_instructor!
+    return true if is_an_instructor? || has_api_token?
+
+    render json: {error:"Not authorized to modify data."}
+    return false
+  end
+
   def user_matches_student?
     if params[:access_token] && params[:github_id]
       current_user_github_id = JSON.parse(HTTParty.get("https://api.github.com/user?access_token=" + params[:access_token]).body)["id"]
@@ -51,8 +58,11 @@ class ApplicationController < ActionController::Base
       instructors = JSON.parse(HTTParty.get("https://api.github.com/teams/1511667/members?access_token=#{token}").body)
       user = HTTParty.get("https://api.github.com/user?access_token=#{token}")
       return true if instructors.map{|i|i["id"]}.include? user["id"]
-    rescue
+    rescue => err
+      Rails.logger.error "ERR: Within ApplicationController#is_an_instructor?\n  #{err}"
+      Rails.logger.debug "BACKTRACE: #{err.backtrace.join("\n")}\n"
     end
   end
 
+  helper_method :is_an_instructor?
 end
