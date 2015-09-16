@@ -25,6 +25,8 @@ Submission.destroy_all
 Assignment.all.each do |assignment|
   assignment.submissions.create([
     {github_id: 8145721, html_url: "benjr.example.com", repo_url: "benjr.github.com", status: "complete"},
+    {github_id: 8145721, html_url: "njr.example.com", repo_url: "benjr.github.com", status: ""},
+    {github_id: 8145721, html_url: "njr.example.com", repo_url: "benjr.github.com", status: ""},
     {github_id: 7883907, html_url: "parke.example.com", repo_url: "parke.github.com", status: ""}
   ])
 end

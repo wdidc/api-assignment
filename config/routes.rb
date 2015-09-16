@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   get '/auth/github/callback', to: "application#authenticate"
   get '/logout', to: "application#logout"
   get '/outcomes', to: "assignments#outcomes"
-
+  get '/students/:github_id/summary', to: "submissions#summary"
   resources :students, only: [:index, :show]
   get 'students/:github_id/submissions', to: "submissions#index"
 

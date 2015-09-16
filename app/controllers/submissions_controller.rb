@@ -16,6 +16,19 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def summary
+    @submissions = Submission.where(github_id: params[:github_id], private: [nil,false])
+    summary = {complete: 0, incomplete: 0, total: @submissions.length}
+    @submissions.each do |submission|
+      unless submission.status.empty?
+        summary[:complete] += 1
+      end
+
+    end
+    summary[:percent_complete] = ((summary[:complete].to_f / summary[:total].to_f) * 100.0).round(0)
+    render json: summary
+  end
+
   def new
     @assignment = Assignment.find_by(weekday: params[:assignment_id]) || Assignment.find(params[:assignment_id])
     @students = Student.all
@@ -75,6 +88,7 @@ class SubmissionsController < ApplicationController
       end
     end
   end
+
   private
   def submission_params
     params.require(:submission).permit(:github_id, :html_url, :repo_url, :status, :private)
