@@ -20,7 +20,7 @@ class SubmissionsController < ApplicationController
     @submissions = Submission.where(github_id: params[:github_id], private: [nil,false])
     summary = {complete: 0, incomplete: 0, total: @submissions.length}
     @submissions.each do |submission|
-      unless submission.status.empty?
+      unless submission.status.blank?
         summary[:complete] += 1
       end
 
