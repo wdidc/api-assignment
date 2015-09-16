@@ -64,7 +64,6 @@ body{
 }
 
 h1 a, h2 a{
-  font-inherit;
   color:inherit;
   letter-spacing:-.05em;
   text-decoration:none;

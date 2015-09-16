@@ -81,5 +81,3 @@ test:
 production:
   <<: *default
   database: api-assignment_production
-  username: api-assignment
-  password: <%= ENV['API-ASSIGNMENT_DATABASE_PASSWORD'] %>
