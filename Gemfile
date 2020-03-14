@@ -41,5 +41,5 @@ group :development, :test do
   gem 'pry'
   gem 'pry-byebug' # adds debugger like functionality to pry (next, step, continue, breakpoints, etc)
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '~> 2.1'
 end
